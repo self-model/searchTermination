@@ -151,7 +151,7 @@ knitr::include_graphics("figures/models.png")
 
 Subject-wise search slopes will be extracted for each combination of search type (color or conjunction) and block number by fitting a linear regression model to the reaction time data with one intercept and one set-size term. 
 
-Analysis will comprise a positive control based on target-present trials, a test of the presence of a pop-out effect for color search in block 1, and a test for the change in slope for color search between blocks 1 and 3. All hypotheses will be tested using a repeated-measures t-test, with a significance level of 0.05. 
+Analysis will comprise a positive control based on target-present trials, a test of the presence of a pop-out effect for color search in block 1, and a test for the change in slope for color search between blocks 1 and 3. All hypotheses will be tested using a within-subject t-test, with a significance level of 0.05. 
 Given the fact that we only have one trial per cell, one excluded trial is sufficient to make some hypotheses impossible to test on a given participant. For this reason, for each hypothesis separately, participants will be included only if all necessary trials meet our inclusion criteria. This means that some hypotheses may be tested on different subsets of participants.
 
 *Hypothesis 1 (Positive control)*: To validate our methods and the quality of our data, we will test for a difference between search slopes for color and conjunction search in block 2 (target-present). Based on previous work we expect a steeper slope for conjunction than for color search [@wolfe1998can; @treisman1980feature]. This positive control will serve to confirm that these effects are detectable in a large sample, even with only one trial per cell. 
