@@ -1,0 +1,12 @@
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\includegraphics[width=1\linewidth]{figures/design} \caption{Design for experiments 1-3. Top panel: each visual search trial will start with a screen indicting the target stimulus. The search display will remain visible until a response is recorded. To motivate accurate responses, the feedback screen will remain visible for one second following correct responses and for four seconds following errors. Middle panel: after reading the instructions, participants will practice the visual search task in blocks of 6 trials, until they reach an accuracy level of 0.83. Bottom panel: the main part of the experiment will comprise 12 trials only, in which the target will be a red circle. Unbeknown the subjects, only trials 5-8 (Block 2) will be Target Present trials, and the remaining trials will be Target Absent trials. Each 4-trial block will follow a 2 by 2 design, with factors being set size (4 or 8) and distractor type (color or conjunction; blue circles only or blue circles and red squares, respectively). In experiment 2, Blocks 1 and 3 will comprise Target Present trials, and block 2 Target Absent trials. In block 2 of experiment 3, blue circles will be replaced with green circles.}\label{fig:design}
+\end{figure*}
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{termination_files/figure-latex/RT-pilot-1.pdf}
+\caption{\label{fig:RT-pilot}Median search time by distractor set size for the two search tasks across the three blocks. Correct responses only. Error bars represent the standard error of the median.}
+\end{figure*}
