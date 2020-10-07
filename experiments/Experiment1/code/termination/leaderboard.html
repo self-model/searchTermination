@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script>alert('aaa')</script>
+  <script src="jatos.js"></script>
+  <script src="jquery/jquery.min.js"></script>
+  <script src="jspsych-6.1.0/jspsych.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Corben&family=Quicksand&display=swap" rel="stylesheet">
+  <link href="style.css" rel="stylesheet" type="text/css"></link>
+</head>
+
+<body>
+<table id="scores">
+    <thead>
+        <tr>
+            <th id="corner"></th>
+            <th>Participant</th>
+            <th>Score</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td colspan="3" style="text-align:center"></td>
+    </tr>
+    </tbody>
+</table>
+<br />
+</body>
+
+<script>
+console.log('aaa')
+
+  $(document).ready(function(e) {
+    // Get all scores
+    var allScores = jatos.batchSession.getAll()
+    console.log(allScores)
+
+    // Sort them in descending order
+    var sortable = [];
+    for (var subj in allScores) {
+        sortable.push([subj, allScores[subj]]);
+    }
+
+    sortable.sort(function(a, b) {
+        return b[1] - a[1];
+    });
+
+    // In case there are more than 10 participants, take only the top 10.
+    sortable = sortable.slice(0,10)
+
+    // This function will take an array and display it as a table
+    function loadTable(tableId, fields, data) {
+        //$('#' + tableId).empty(); //not really necessary
+        var rows = '';
+        $.each(data, function(key,item) {
+            var position = key+1
+            var row = '<tr>';
+            row += '<td>' + position + '</td>'; // serial position
+            row += '<td>' + item[0] + '</td>'; // participant name
+            row += '<td>' + item[1] + '</td>'; // bonus
+            rows += row + '<tr>';
+        });
+        $('#' + tableId + ' tbody').html(rows);
+    }
+
+    loadTable('scores', ['Participant', 'Score'], sortable);
+
+})
+</script>
+</html>
