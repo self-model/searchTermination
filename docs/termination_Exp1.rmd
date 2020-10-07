@@ -196,7 +196,7 @@ The research complies with all relevant ethical regulations, and was approved by
 
 ## Procedure
 
-The task, as delivered to participants, can be accessed [in the following link](http://167.99.93.4/publix/30/start?batchId=51&generalMultiple).
+The task, as delivered to participants, can be accessed [in the following link](https://matanmazor.github.io/termination/).
 
 Participants were first instructed about the visual search task. Specifically, that their task is to report, as accurately and quickly as possible, whether a target stimulus was present (press 'J') or absent (press 'F'). Then, practice trials were delivered, in which the target stimulus was a rotated *T*, and distractors were rotated *L*s. The purpose of the practice trials was to familiarize participants with the structure of the task. For these practice trials the number of items was always 3. Practice trials were delivered in small blocks of 6 trials each, and the main part of the experiment started only once participants responded correctly on at least five trials in a block (see Figure \@ref(fig:design)). 
 
