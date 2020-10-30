@@ -1,5 +1,5 @@
 ---
-title             : "Metacognitive contributions to search termination"
+title             : "Metacognitive contributions to search termination: pre-registration document"
 shorttitle        : "termination"
 
 author: 
@@ -95,7 +95,7 @@ knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
 <!-- In this study we ask what portion of this implicit metacognitive knowledge about search efficiency is available prior to engaging with the task, how it is expanded based on positive samples, and how it is used to make efficient inference about absence. In the experiments outlines below, target-present trials are used as learning samples (where subjects observe how efficiently they can find a target), and target-absent trials are used as test trials (where subjects terminate the search when they believe a target would have been found). By testing participants' prior knowledge state, and their ability to learn and generalize from a few positive samples, we lay the groundwork for building a model of the Visual Search Schema.  -->
 
  
-```{r load_pilot_data, echo=FALSE, cache=TRUE}
+```{r load_data, echo=FALSE, cache=TRUE}
 
 df <- read_csv('../experiments/Experiment1/data/jatos_results_batch1.csv') %>%
   rename('subj_id' = 'subject_identifier') %>%
@@ -106,8 +106,7 @@ N_total <- df$subj_id%>%unique()%>%length()
 search_df <- df %>%
   filter((test_part=='absence1') | (test_part=='absence2') | (test_part=='presence1')) %>%
   select('subj_id','test_part','set_size','target_present','correct','RT','search_type') %>%
-  mutate(
-         # target= ifelse(test_part=='Q_in_O_vs', 1, 2), CORRECTED AFTER PREREGISTRATION
+  mutate(target= ifelse(test_part=='Q_in_O_vs', 1, 2),
          response = ifelse(correct==1, target_present, 1-target_present)) %>%
   mutate(trial = sequence(rle(as.character(subj_id))$lengths),
          i = trial%%4,
@@ -130,7 +129,7 @@ excluded <- search_df %>%
 correctOrderEffects <- function(df) {
   fit <- lm(RTfiltered ~ i, data=df)
   slope = fit$coefficients[2];
-  return(df$RTfiltered-slope*(df$i)) # CORRECTED AFTER PREREGISTRATION
+  return(df$RTfiltered-slope*(df$i-2.5))
 }
 
 search_df <- search_df %>%
@@ -141,8 +140,11 @@ search_df <- search_df %>%
   group_by(test_part) %>%
   do(mutate(.,RTcorrected = correctOrderEffects(.)))
 
+
+  
 search_df$test_part = factor(search_df$test_part, levels = c('absence1','presence1','absence2'))
 search_df$search_type = factor(search_df$search_type, levels = c('color','conjunction'))
+
 
 descriptives <- search_df %>% 
   filter(!subj_id%in%excluded$subj_id) %>%
@@ -150,22 +152,81 @@ descriptives <- search_df %>%
   summarise(accuracy=mean(correct), RT=median(RT))
 ```
 
-```{r analyze_pilot_data, echo=FALSE, cache=TRUE}
+# Methods
+We report how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study. <!-- 21-word solution (Simmons, Nelson & Simonsohn, 2012; retrieved from http://ssrn.com/abstract=2160588) -->
+
+## Participants
+
+The research complied with all relevant ethical regulations, and was approved by the Research Ethics Committee of University College London (study ID number 1260/003). `r N_total` Participants were recruited via Prolific, and gave their informed consent prior to their participation. They were selected based on their acceptance rate (>95%) and for being native English speakers. We collected data until we reached 320 included participants for each of our hypotheses (after applying our pre-registered exclusion criteria). The entire experiment took around 3 minutes to complete (median completion time in our pilot data: 3:06 minutes). Participants were paid £0.38 for their participation, equivalent to an hourly wage of £7.60.
+
+## Procedure
+
+Participants were first instructed about the visual search task. Specifically, that their task is to report, as accurately and quickly as possible, whether a target stimulus was present (press 'J') or absent (press 'F'). Then, practice trials were delivered, in which the target stimulus was a rotated *T*, and distractors are rotated *L*s. The purpose of the practice trials was to familiarize participants with the structure of the task. For these practice trials the number of items was always 3. Practice trials were delivered in small blocks of 6 trials each, and the main part of the experiment started only once participants responded correctly on at least five trials in a block (see Figure \@ref(fig:design)). 
+
+
+```{r design, echo=FALSE, fig.cap="Experimental design. Top panel: each visual search trial started with a screen indicating the target stimulus. The search display remained visible until a response is recorded. To motivate accurate responses, the feedback screen remained visible for one second following correct responses and for four seconds following errors. Middle panel: after reading the instructions, participants practiced the visual search task in blocks of 6 trials, until they had reached an accuracy level of 83% correct or higher (at most one error per block of 6 trials). Bottom panel: the main part of the experiment comprised 12 trials only, in which the target was a red circle. Unbeknown the subjects, only trials 5-8 (Block 2) were target-present trials, and the remaining trials were target-absent trials. Each 4-trial block followed a 2 by 2 design, with factors being set size (4 or 8) and distractor type (color or conjunction; blue circles only or blue circles and red squares, respectively).", out.width = '100%'}
+knitr::include_graphics("figures/designExp1.png")
+```
+
+In the main part of the experiment, participants searched for a red circle among blue circles or a mixed array of blue circles and red squares. Set sizes was 4 or 12, resulting in a 2-by-2 design (search type: color or color$\times$shape, by set size: 4 or 12). Critically, and unknown to subjects, the first four trials were always target-absent trials (one of each set-size $\times$ search-type combination), presented in randomized order. These trials were followed by the four corresponding target-present trials, presented in randomized order. The final four trials were again target-absent trials, presented in randomized order.
+
+<!-- ## Experiment 2 (conditioned on the results of Experiment 1) -->
+
+<!-- Experiment 2 will be identical to Experiment 1, except for the order of blocks. This experiment will start with 4 Target Presence trials, followed by 4 target-absent trials, followed by 4 target-present trials. The purpose of this order reversal manipulation is to test whether the pattern observed in Experiment 1 (for example, a learning effect between blocks 1 and 3) is unique to Target Absence trials, or alternatively emerges in the first trials of the experiment, regardless of the presence or absence of a target. -->
+
+<!-- ## Experiment 3 (conditioned on the results of Experiments 1 and 2) -->
+
+<!-- Experiment 3 will be identical to Experiment 1, except for the four 'target-present' trials. Only in these four trials, blue circles will be replaced by green circles. The purpose of this manipulation is to test whether any learning between blocks 1 and 3 in Experiment 1 critically depends on direct experience with searching among distractors of a specific color, or alternatively, if learning about color search efficiency generalizes across colors. -->
+
+### Randomization
+
+The order and timing of experimental events was determined pseudo-randomly by the Mersenne Twister pseudorandom number generator, initialized in a way that ensures registration time-locking [@mazor2019novel]. 
+
+## Data analysis
+
+### Rejection criteria
+
+Participants were excluded for making more than one error in the main part of the experiment, or for having extremely fast or slow reaction times in one or more of the tasks (below 250 milliseconds or above 5 seconds in more than 25% of the trials). 
+
+Error trials, and trials with response time below 250 milliseconds or above 1 second were excluded from the response-time analysis.
+
+### Data preprocessing
+
+To control for within-block trial order effects, a separate linear regression model was fitted to the data of each block, predicting search time as a function of trial serial order ($RT \sim \beta_0+\beta_1i$, with $i$ denoting the mean-centered serial position within a block). Search times were corrected by subtracting the product of the slope and the mean-centered serial position, in a block-wise manner.
+
+### Hypotheses and analysis plan
+
+This study is designed to test several hypotheses about the contribution of metacognitive knowledge to search termination, the state of this knowledge prior to engaging with the task, and the effect of experience trials on this metacognitive knowledge. We outline some possible search time patterns and their interpretation in Fig. \@ref(fig:models). In the next section we demonstrate our hypotheses and analyses on pilot data.
+
+
+```{r models, echo=FALSE, fig.cap="Top left: typical search time results in visual search experiments with many trials. Set size (x axis) affects search time in conjunction search, but much less so in color search. However, it is unclear whether this pattern is also true for the first trials in an experiment. Top right: one possible pattern is that the same qualitative pattern will be observed in our design, with an overall decrease in response time as a function of trial number. This will suggest that the metacognitive knowledge necessary to support efficient inference about absence was already in place before engaging with the task. Bottom left: an alternative pattern is that the same qualitative pattern will be observed for blocks 2 and 3, but not in block 1. This will suggest that for inference about absence to be efficient, participants had to experience some target-present trials. Bottom right: alternatively, some of the metacognitive knowledge is available prior to engaging with the task, and some is acquired by exposure to target-present trials. This will manifest as different slopes for conjunction and color searches in blocks 1 and a learning effect for color search between blocks 1 and 3.", out.width = '100%'}
+knitr::include_graphics("figures/models.png")
+```
+
+
+Subject-wise search slopes were extracted for each combination of search type (color or conjunction) and block number by fitting a linear regression model to the reaction time data with one intercept and one set-size term. 
+
+Analysis comprised a positive control based on target-present trials, a test of the presence of a pop-out effect for color search in block 1, and a test for the change in slope for color search between blocks 1 and 3. All hypotheses were tested using a within-subject t-test, with a significance level of 0.05. 
+Given the fact that we only have one trial per cell, one excluded trial is sufficient to make some hypotheses impossible to test on a given participant. For this reason, for each hypothesis separately, participants were included only if all necessary trials met our inclusion criteria. This means that some hypotheses were tested on different subsets of participants.
+
+## Results
+
+We used `r cite_r("r-references.bib")` for all our analyses.
+
+
+```{r analyze_data, echo=FALSE, cache=TRUE}
 
 median_search_times <- search_df %>%
   filter(include==1) %>%
   group_by(test_part,set_size,search_type) %>%
   summarise(mean_trial=mean(trial),median_RT= median(RTcorrected), 
             sem_RT=se(RTcorrected)*1.2533)%>%
-  mutate(response=test_part=='presence1') %>%
-  mutate(response=factor(response,levels=c(TRUE,FALSE)))
+  mutate(response=test_part=='presence1')
 
-accuracy <- search_df %>%
+mean_acc <- search_df %>%
   group_by(test_part,set_size,search_type) %>%
-  summarise(mean_trial=mean(trial),
-            acc= mean(correct)) %>%
-  mutate(response=test_part=='presence1') %>%
-  mutate(response=factor(response,levels=c(TRUE,FALSE)))
+  summarise(mean_acc=mean(correct))%>%
+  mutate(response=test_part=='presence1')
 
 search_slopes <- search_df %>%
   filter(include==1) %>%
@@ -185,110 +246,61 @@ slopes_wide <- pivot_wider(search_slopes,
                            values_from = estimate)
 ```
 
-# Experiment 1
-We report how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study. <!-- 21-word solution (Simmons, Nelson & Simonsohn, 2012; retrieved from http://ssrn.com/abstract=2160588) --> We used `r cite_r("r-references.bib", pkgs=c('BayesFactor','broom','ggplot2','cowplot','dplyr','papaja','tidyr','pwr','MESS','purrr'), withhold=FALSE)` for all our analyses.
+Overall mean accuracy was `r printnum(mean(descriptives$accuracy))` (standard deviation =`r printnum(sd(descriptives$accuracy))`). The median reaction time was `r printnum(median(descriptives$RT))` ms (median absolute deviation = `r printnum(mad(descriptives$RT))`). In all further analyses, only correct trials with response time between 250 and 1000 ms are included. 
+
+*Hypothesis 1 (positive control)*: Search times in block 2 (target-present) followed the expected pattern, with a steep slope for conjunction search (`r apa_print(t.test(slopes_wide$conjunction_presence1,na.rm=TRUE))$estimate`) and a shallow slope for conjunction search (`r apa_print(t.test(slopes_wide$color_presence1,na.rm=TRUE))$estimate`; see Fig. \@ref(fig:exp1Plot)). The slope for color search was significantly lower than 10 ms/item and thus met our criterion for being considered 'pop-out' (`r apa_print(t.test(slopes_wide$color_presence1,na.rm=TRUE,mu=10,alternative='less'))$statistic`). Furthermore, the difference between the slopes was significant (`r apa_print(t.test(slopes_wide$conjunction_presence1-slopes_wide$color_presence1,na.rm=TRUE))$statistic`). This positive control served to validate our method.
+
+*Hypothesis 2*: Our central focus was on results from block 1 (target-absent). Here participants didn't yet have experience with searching for the red circle. Similar to the second block, the slope for the conjunction search was steep (`r apa_print(t.test(slopes_wide$conjunction_absence1,na.rm=TRUE))$estimate`). A clear ‘pop-out’ effect for color search was also evident (`r apa_print(t.test(slopes_wide$color_absence1,na.rm=TRUE,mu=10, alternative='less'))$full_result`). Furthermore, the average search slope for color search in this first block was significantly different from that of the conjunction search (`r apa_print(t.test(slopes_wide$conjunction_absence1-slopes_wide$color_absence1,na.rm=TRUE))$statistic`), indicating that a color-absence pop-out does not depend on task experience.
+
+Pre-registered hypotheses 3-5 were designed to test for a learning effect between blocks 1 and 3, before and after experience with observing a red target among blue distractors. Given the overwhelming pop-out effect for target-absent trials in block 1, no much room for learning was left. Indeed, results from these tests support a prior-knowledge only model (see Fig. \@ref(fig:models)).
+
+*Hypothesis 3*: Like in the first block, in the third block color search complied with our criterion for ‘pop-out’  (`r apa_print(t.test(slopes_wide$color_absence2,na.rm=TRUE,mu=10, alternative='less'))$full_result`), and was significantly different from the search for conjunction search (`r apa_print(t.test(slopes_wide$conjunction_absence2-slopes_wide$color_absence2,na.rm=TRUE))$statistic`). This result is not surprising, given that a pop-out effect was already observed in block 1.
+
+*Hypothesis 4*: To quantify the learning effect for color search, we directly contrasted the search slope for color search in blocks 1 and 3. We find no evidence for a learning effect (`r apa_print(t.test(slopes_wide$color_absence1-slopes_wide$color_absence2,na.rm=TRUE))$statistic`). Furthermore, a Bayesian t-test with a scaled Cauchy prior for effect sizes (r=0.707) provided strong evidence in favour of the absence of a learning effect (`r apa_print(ttestBF(na.omit(slopes_wide$color_absence1-slopes_wide$color_absence2)))$statistic`).
+
+*Hypothesis 5*: In case of a learning effect for pop-out search, Hypothesis 5 was designed to test the specificity of this effect to color pop-out by computing an interaction of block number and search type. Given that no learning effect has been observed, this test makes little sense. For completeness, we report that the change in slope between blocks 1 and 3 was similar for color and conjunction search (`r apa_print(t.test(slopes_wide$color_absence1-slopes_wide$color_absence2-slopes_wide$conjunction_absence1+slopes_wide$conjunction_absence2,na.rm=TRUE))$full_result`). 
 
 
-
-## Participants
-
-The research complies with all relevant ethical regulations, and was approved by the Research Ethics Committee of University College London (study ID number 1260/003). Participants were recruited via Prolific, and gave informed consent prior to their participation. They were selected based on their acceptance rate (>95%) and for being native English speakers. Following our pre-registration, We collected data until we reached 320 included participants for each of our hypotheses (after applying our pre-registered exclusion criteria). This amounted to a total of `r N_total` participants. The entire experiment took 3 minutes to complete (median completion time: 3:19 minutes). Participants were paid £0.38 for their participation, equivalent to an hourly wage of £6.90. 
-
-## Procedure
-
-The task, as delivered to participants, can be accessed [in the following link](https://matanmazor.github.io/termination/).
-
-Participants were first instructed about the visual search task. Specifically, that their task is to report, as accurately and quickly as possible, whether a target stimulus was present (press 'J') or absent (press 'F'). Then, practice trials were delivered, in which the target stimulus was a rotated *T*, and distractors were rotated *L*s. The purpose of the practice trials was to familiarize participants with the structure of the task. For these practice trials the number of items was always 3. Practice trials were delivered in small blocks of 6 trials each, and the main part of the experiment started only once participants responded correctly on at least five trials in a block (see Figure \@ref(fig:design)). 
-
-
-```{r design, echo=FALSE, fig.cap="Experimental design. Top panel: each visual search trial started with a screen indicating the target stimulus. The search display remained visible until a response was recorded. To motivate accurate responses, the feedback screen remained visible for one second following correct responses and for four seconds following errors. Middle panel: after reading the instructions, participants practiced the visual search task in blocks of 6 trials, until they had reached an accuracy level of 83% correct or higher (at most one error per block of 6 trials). Bottom panel: the main part of the experiment comprised 12 trials only, in which the target was a red circle. Unbeknown the subjects, only trials 5-8 (Block 2) were target-present trials, and the remaining trials were target-absent trials. Each 4-trial block followed a 2 by 2 design, with factors being set size (4 or 8) and distractor type (color or conjunction; blue circles only or blue circles and red squares, respectively).", out.width = '100%'}
-knitr::include_graphics("figures/designExp1.png")
-```
-
-In the main part of the experiment, participants looked for a red circle among blue circles or a mixed array of blue circles and red squares. Set sizes were 4 or 12, resulting in a 2-by-2 design (search type: color or color$\times$shape, by set size: 4 or 12). Critically, and unknown to subjects, the first four trials were always target-absent trials (one of each set-size $\times$ search-type combination), presented in randomized order. These trials were followed by the four corresponding target-present trials, presented in randomized order. The final four trials were again target-absent trials, presented in randomized order.
-
-<!-- ## Experiment 2 (conditioned on the results of Experiment 1) -->
-
-<!-- Experiment 2 will be identical to Experiment 1, except for the order of blocks. This experiment will start with 4 Target Presence trials, followed by 4 target-absent trials, followed by 4 target-present trials. The purpose of this order reversal manipulation is to test whether the pattern observed in Experiment 1 (for example, a learning effect between blocks 1 and 3) is unique to Target Absence trials, or alternatively emerges in the first trials of the experiment, regardless of the presence or absence of a target. -->
-
-<!-- ## Experiment 3 (conditioned on the results of Experiments 1 and 2) -->
-
-<!-- Experiment 3 will be identical to Experiment 1, except for the four 'target-present' trials. Only in these four trials, blue circles will be replaced by green circles. The purpose of this manipulation is to test whether any learning between blocks 1 and 3 in Experiment 1 critically depends on direct experience with searching among distractors of a specific color, or alternatively, if learning about color search efficiency generalizes across colors. -->
-
-### Randomization
-
-The order and timing of experimental events was determined pseudo-randomly by the Mersenne Twister pseudorandom number generator, initialized in a way that ensures registration time-locking [@mazor2019novel]. 
-
-## Data analysis
-
-Experiment 1 was designed to test several hypotheses about the contribution of metacognitive knowledge to search termination, the state of this knowledge prior to engaging with the task, and the effect of experience trials on this metacognitive knowledge. We outline some possible search time patterns and their interpretation in Fig. \@ref(fig:models). 
-
-```{r models, echo=FALSE, fig.cap="Top left: typical search time results in visual search experiments with many trials. Set size (x axis) affects search time in conjunction search, but much less so in color search. However, it is unclear whether this pattern is also true for the first trials in an experiment. Top right: one possible pattern is that the same qualitative pattern will be observed in our design, with an overall decrease in response time as a function of trial number. This will suggest that the metacognitive knowledge necessary to support efficient inference about absence was already in place before engaging with the task. Bottom left: an alternative pattern is that the same qualitative pattern will be observed for blocks 2 and 3, but not in block 1. This will suggest that for inference about absence to be efficient, participants had to experience some target-present trials. Bottom right: alternatively, some of the metacognitive knowledge is available prior to engaging with the task, and some is acquired by exposure to target-present trials. This will manifest as different slopes for conjunction and color searches in blocks 1 and a learning effect for color search between blocks 1 and 3.", out.width = '100%'}
-knitr::include_graphics("figures/models.png")
-```
-
-
-
-Pre-registered analysis comprised a positive control based on target-present trials, a test of the presence of a pop-out effect for color search in block 1, and a test for the change in slope for color search between blocks 1 and 3. Detailed analysis plans and power calculations are outlined in our [pre-registration document](https://osf.io/ea385). 
-
-### Rejection criteria
-
-Participants were excluded for making more than one error in the main part of the experiment, or for having extremely fast or slow reaction times in one or more of the tasks (below 250 milliseconds or above 5 seconds in more than 25% of the trials). The data of `r N_total-excluded%>%nrow` participants met our pre-registered inclusion criteria and were used for the main analysis.
-
-Error trials, and trials with response time below 250 milliseconds or above 1 second wiere excluded from the response-time analysis.
-
-### Data preprocessing
-
-To control for within-block trial order effects, a separate linear regression model was fit to the data of each block, predicting search time as a function of trial serial order ($RT \sim \beta_0+\beta_1i$, with $i$ denoting the mean-centered serial position within a block). Search times were corrected by subtracting the product of the slope and the mean-centered serial position, in a block-wise manner. Subject-wise search slopes were extracted for each combination of search type (color or conjunction) and block number by fitting a linear regression model to the reaction time data with one intercept and one set-size term.
-
-# Results
-
-```{r RTexp1, fig.width=5, fig.height=5, echo=FALSE, fig.cap="Median search time by distractor set size for the two search tasks across the three blocks. Correct responses only. Error bars represent the standard error of the median."}
+```{r exp1Plot, echo=FALSE, fig.cap="Median search time by distractor set size for the two search tasks across the three blocks. Correct responses only. Error bars represent the standard error of the median."}
 
 block_names <-  c("Block 1 (Absence)", "Block 2 (Presence)", "Block 3 (Absence)");
 
-myColors <- c("#ED1C24", "#0071BC") #RED, BLUE
-names(myColors) <- c("color","conjunction")
-
 names(block_names) <- c("absence1", "presence1", "absence2");
-
-rt_plot <- ggplot(data=median_search_times, 
-       aes(x=set_size, y=median_RT, color=search_type)) +
-  geom_line(aes(linetype=response),size=1) +
-  geom_point(aes(shape = search_type, fill=search_type), size=5,color="black",stroke=1) +
-  scale_fill_manual(name = "search_type",values = myColors) +
-  scale_color_manual(name = "search_type",values = myColors) +
-  scale_shape_manual(values=c(21,24))+
+RTplot <- ggplot(data=median_search_times, 
+       aes(x=set_size, y=median_RT, color=search_type, fill=search_type, linetype=test_part)) +
+  geom_line(size=1) +
+  geom_point(aes(shape = search_type), size=4, color="black",stroke=1.5) +
+  scale_shape_manual(values=c(21,22))+
+  scale_fill_manual(values = c("#377eb8", "#e41a1c"))+
+  scale_color_manual(values = c("#377eb8", "#e41a1c"))+
+  scale_linetype_manual(values=c("21", "solid","21"))+
   facet_grid(cols = vars(test_part))+
-  geom_errorbar(aes(ymin=median_RT-sem_RT,ymax=median_RT+sem_RT)) +
+  geom_errorbar(aes(ymin=median_RT-sem_RT,ymax=median_RT+sem_RT),linetype="solid", width=0.6) +
   facet_grid(cols = vars(test_part), 
              labeller = labeller(test_part = block_names))+
-  labs(x='',y='median RT (seconds)', title='Search time curves') + 
+  labs(x='set size',y='median RT (seconds)', title='Search time curves') + 
   theme_bw()+ 
   scale_x_continuous(breaks = c(4,8))+
-  theme(legend.position=c(0.5, 0.85),
-        legend.background = element_rect(fill=NA),
-        axis.text.x=element_blank(),
-        axis.ticks.x=element_blank()) +
+  theme(legend.position='none',
+        legend.background = element_rect(fill=NA))+
   guides(color = FALSE, linetype=FALSE) 
 
-acc_plot <- ggplot(data=accuracy, 
-                   aes(x=set_size,y=acc, fill=search_type, group=search_type)) +
-  geom_bar(stat='identity',position='dodge') +
-  scale_fill_manual(name = "search_type",values = myColors) + 
-  facet_grid(cols = vars(test_part)) + 
-  labs(x='set size',y='accuracy') + 
-    theme_classic()+ 
+accplot <- ggplot(data=mean_acc, 
+       aes(x=set_size, y=mean_acc, fill=search_type)) +
+  geom_bar(position='dodge',stat='identity') +
+  theme_classic()+ 
+  scale_fill_manual(values = c("#377eb8", "#e41a1c"))+
+  facet_grid(cols = vars(test_part))+
+  labs(x='set size',y='accuracy') +
+  scale_x_continuous(breaks = c(4,8))+
+  scale_y_continuous(breaks = c(0.5,1))+
   coord_cartesian(ylim=c(0.5,1)) +
-    scale_x_continuous(breaks = c(4,8)) +
-    scale_y_continuous(breaks = c(0.5,1)) +
-  guides(color = FALSE, linetype=FALSE) +
-  theme(legend.position='none',
-        strip.background = element_blank(),
-        strip.text.x = element_blank()
-    )
+  theme(legend.position='none')+ theme(strip.background = element_blank(),
+   strip.text.x = element_blank())
 
-plot_grid(rt_plot,acc_plot,ncol=1,rel_heights=c(3.5,1))
+plot_grid(RTplot,accplot,nrow=2,rel_heights=c(3,1))
+
+ggsave('results.png',width=5,height=4.5)
 # ggplot(data=mean_search_slopes, aes(x=search_type, y=mean_slope))+
 #   geom_bar(aes(fill=search_type), stat="identity",show.legend = FALSE)+
 #   geom_errorbar(aes(ymin=mean_slope-se_slope, ymax=mean_slope+se_slope), width=.2)+
@@ -297,46 +309,75 @@ plot_grid(rt_plot,acc_plot,ncol=1,rel_heights=c(3.5,1))
 #   theme_minimal()
 ```
 
-Overall mean accuracy was `r printnum(mean(descriptives$accuracy))` (standard deviation =`r printnum(sd(descriptives$accuracy))`). The median reaction time was `r printnum(median(descriptives$RT))` ms (median absolute deviation = `r printnum(mad(descriptives$RT))`). Unless indicated otherwise, in all further analyses only correct trials with response time between 250 and 1000 ms are included. 
 
-*Hypothesis 1 (positive control)*: Search times in block 2 (target-present) followed the expected pattern, with a steep slope for conjunction search (`r apa_print(t.test(slopes_wide$conjunction_presence1,na.rm=TRUE))$estimate`) and a shallow slope for color search (`r apa_print(t.test(slopes_wide$color_presence1,na.rm=TRUE))$estimate`; see Fig. \@ref(fig:RTexp1)). The slope for color search was significantly lower than 10 ms/item and thus met our criterion for being considered 'pop-out' (`r apa_print(t.test(slopes_wide$color_presence1,na.rm=TRUE,mu=10,alternative='less'))$statistic`). Furthermore, the difference between the slopes was significant (`r apa_print(t.test(slopes_wide$conjunction_presence1-slopes_wide$color_presence1,na.rm=TRUE))$statistic`). This positive control served to validate our method.
+```{r first_trial_only, echo=FALSE, cache=TRUE}
 
-*Hypothesis 2*: Our central focus was on results from block 1 (target-absent). Here participants didn't yet have experience with finding red circle, so a pop-out effect cannot be attributed to task experience. Similar to the second block, the slope for the conjunction search was steep (`r apa_print(t.test(slopes_wide$conjunction_absence1,na.rm=TRUE))$estimate`). A clear 'pop-out' effect for color search was also evident (`r apa_print(t.test(slopes_wide$color_absence1,na.rm=TRUE))$estimate`; `r apa_print(t.test(slopes_wide$color_absence1,na.rm=TRUE,mu=10, alternative='less'))$statistic`). Furthermore, the average search slope for color search in this first block was significantly different from that of the conjunction search (`r apa_print(t.test(slopes_wide$conjunction_absence1-slopes_wide$color_absence1,na.rm=TRUE))$statistic`), indicating that a color-absence pop-out does not depend on task experience.
+first_trial_df <- search_df %>%
+  filter(trial==1)
 
-Pre-registered hypotheses 3-5 were designed to test for a learning effect between blocks 1 and 3, before and after experience with observing a red target among blue distractors. Given the overwhelming pop-out effect for target-absent trials in block 1, no much room for learning was left. Indeed, results from these tests support a prior-knowledge only model (see Fig. \@ref(fig:models), top panel).
+median_search_times_first_trial <- first_trial_df %>%
+  filter(include==1) %>%
+  group_by(test_part,set_size,search_type) %>%
+  summarise(mean_trial=mean(trial),median_RT= median(RT), num_trials=length(RT),
+            sem_RT=se(RT)*1.2533)%>%
+  mutate(response=test_part=='presence1')
 
-*Hypotheses 3*: Like in the first block, in the third block color search complied with our criterion for 'pop-out' (`r apa_print(t.test(slopes_wide$color_absence2,na.rm=TRUE))$estimate`; `r apa_print(t.test(slopes_wide$color_absence2,na.rm=TRUE,mu=10, alternative='less'))$statistic`), and was significantly different from the slope for conjunction search (`r apa_print(t.test(slopes_wide$conjunction_absence2-slopes_wide$color_absence2,na.rm=TRUE))$statistic`).This result is not surprising, given that a pop-out effect was already observed in block 1. 
+search_slopes_first_trial <- first_trial_df %>%
+  filter(include==1) %>%
+  group_by(search_type) %>%
+  do(model=lm(RT~set_size,data=.)) %>%
+  tidy(model) %>%
+  filter(term=='set_size')
 
-*Hypothesis 4*: To quantify a possible learning effect for color search, we directly contrasted the search slope for color search in blocks 1 and 3, by contrasting the color slopes for the target-absence blocks 1 and 3. We find no evidence for a learning effect (`r apa_print(t.test(slopes_wide$color_absence1-slopes_wide$color_absence2,na.rm=TRUE))$statistic`). Furthermore, a Bayesian t-test with a scaled Cauchy prior for effect sizes  ($r=0.707$) provided strong evidence in favour of the absence of a learning effect (`r apa_print(ttestBF(x=na.omit(slopes_wide$color_absence1-slopes_wide$color_absence2)))$statistic`).
+block_names <-  c("Block 1 (Absence)", "Block 2 (Presence)", "Block 3 (Absence)");
 
-*Hypothesis 5*: In case of a learning effect for pop-out search, Hypothesis 5 was designed to test the specificity of this effect to color pop-out by computing an interaction of block number and search type. Given that no learning effect has been observed, this test makes little sense. For completeness, we report that the change in slope between blocks 1 and 3 was similar for color and conjunction search (`r apa_print(t.test(slopes_wide$color_absence1-slopes_wide$color_absence2-slopes_wide$conjunction_absence1+slopes_wide$conjunction_absence2,na.rm=TRUE))$full_result`; `r apa_print(ttestBF(x=na.omit(slopes_wide$color_absence1-slopes_wide$color_absence2-slopes_wide$conjunction_absence1+slopes_wide$conjunction_absence2)))$statistic`). 
+names(block_names) <- c("absence1", "presence1", "absence2");
+# ggplot(data=median_search_times_first_trial, 
+#        aes(x=set_size, y=median_RT, color=search_type, fill=search_type, linetype=test_part)) +
+#   geom_line(size=1.5) +
+#   geom_point(aes(shape = search_type), size=6, color="black",stroke=1.5) +
+#   scale_shape_manual(values=c(21,24))+
+#   scale_fill_manual(values = c("#e41a1c", "#377eb8"))+
+#   scale_color_manual(values = c("#e41a1c", "#377eb8"))+
+#   scale_linetype_manual(values=c("dashed", "solid","dashed"))+
+#   facet_grid(cols = vars(test_part))+
+#   geom_errorbar(aes(ymin=median_RT-sem_RT,ymax=median_RT+sem_RT),linetype="solid") +
+#   facet_grid(cols = vars(test_part), 
+#              labeller = labeller(test_part = block_names))+
+#   labs(x='set size',y='median RT (seconds)', title='Search time curves') + 
+#   theme_bw()+ 
+#   scale_x_continuous(breaks = c(4,8))+
+#   theme(legend.position=c(0.5, 0.85),
+#         legend.background = element_rect(fill=NA))+
+#   guides(color = FALSE, linetype=FALSE) 
 
-## Additional analyses
+```
 
-``` {r color_first, echo=FALSE, cache=TRUE}
 
-excluded_color <- search_df %>%
+```{r color_first, echo=FALSE, cache=TRUE}
+
+color_first_subjects <-search_df %>%
   group_by(subj_id) %>%
-  summarise(acc = mean(correct),
-            RTlow = quantile(RT,0.25),
-            RThigh = quantile(RT,0.75),
-            first_trial = search_type[trial==1],
-            second_trial = search_type[trial==2])%>%
-  filter(acc<min_acc_search | RTlow<minRT | RThigh>maxRTsubj | first_trial != 'color' | second_trial != 'color') %>%
-  select('subj_id')
+  summarise(
+    first_cond=search_type[trial==1], 
+    second_cond=search_type[trial==2]) %>%
+  filter(
+    first_cond=='color' &
+      second_cond=='color')
 
-search_df_color_first <- search_df %>%
-  mutate( include=RT>minRT & 
-            RT<maxRTtrial & correct==1 & 
-            !subj_id%in%excluded_color$subj_id,
-          RTfiltered = ifelse(include, RT, NA)) %>%
-  group_by(test_part) %>%
-  do(mutate(.,RTcorrected = correctOrderEffects(.)))
+color_first_df <- search_df %>%
+  filter(subj_id %in% color_first_subjects$subj_id)
 
-search_df_color_first$test_part = factor(search_df_color_first$test_part, levels = c('absence1','presence1','absence2'))
-search_df_color_first$search_type = factor(search_df_color_first$search_type, levels = c('color','conjunction'))
+median_search_times_color_first <- color_first_df %>%
+  filter(include==1) %>%
+  group_by(test_part,set_size,search_type) %>%
+  summarise(mean_trial=mean(trial),
+            median_RT= median(RTfiltered), 
+            num_trials=length(RT),
+            sem_RT=se(RTfiltered)*1.2533)%>%
+  mutate(response=test_part=='presence1')
 
-search_slopes_color_first <- search_df_color_first %>%
+search_slopes_color_first <- color_first_df %>%
   filter(include==1) %>%
   group_by(subj_id,search_type,test_part) %>%
   do(model=lm(RTcorrected~set_size,data=.)) %>%
@@ -347,14 +388,167 @@ slopes_wide_color_first <- pivot_wider(search_slopes_color_first,
                            id_cols = 'subj_id',
                            names_from = c('search_type','test_part'),
                            values_from = estimate)
+
+block_names <-  c("Block 1 (Absence)", "Block 2 (Presence)", "Block 3 (Absence)");
+
+# ggplot(data=median_search_times_color_first, 
+#        aes(x=set_size, y=median_RT, color=search_type, fill=search_type, linetype=test_part)) +
+#   geom_line(size=1) +
+#   geom_point(aes(shape = search_type), size=4, color="black",stroke=1.5) +
+#   scale_shape_manual(values=c(21,22))+
+#   scale_fill_manual(values = c("#377eb8", "#e41a1c"))+
+#   scale_color_manual(values = c("#377eb8", "#e41a1c"))+
+#   scale_linetype_manual(values=c("21", "solid","21"))+
+#   facet_grid(cols = vars(test_part))+
+#   geom_errorbar(aes(ymin=median_RT-sem_RT,ymax=median_RT+sem_RT),linetype="solid", width=0.6) +
+#   facet_grid(cols = vars(test_part), 
+#              labeller = labeller(test_part = block_names))+
+#   labs(x='set size',y='median RT (seconds)', title='Search time curves') + 
+#   theme_bw()+ 
+#   scale_x_continuous(breaks = c(4,8))+
+#   theme(legend.position='none',
+#         legend.background = element_rect(fill=NA))+
+#   guides(color = FALSE, linetype=FALSE) 
+# 
+# ggsave('color_first.png',dpi=300, width=7, height=5, units='in')
 ```
 
-In Experiment 1, we found a clear pop-out effect for color absence in the first trials of the experiment, before participants experienced color pop-out in target-present trials. As per our analysis, this reflects prior metacognitive knowledge about the expected efficiency of color search. In order to terminate the search immediately, participants must have known, implicitly or explicitly, that a red item would have popped out immediately. In the setting of this experiment, this knowledge could not be acquired in previous trials. However, an alternative account is that participants noticed the pop-out of the red distractors in the conjunction trials of block 1, and based their expectation for color pop out on those trials. This account can be directly tested by zeroing in on the subset of participants that performed the two color trials before the two conjunction trials in block 1. This subset of participants showed a clear pop-out effect (color slope in block 1: `r apa_print(t.test(slopes_wide_color_first$color_absence1,na.rm=TRUE))$estimate`; `r apa_print(t.test(slopes_wide_color_first$color_absence1,na.rm=TRUE,mu=10, alternative='less'))$statistic`)), indicating that the color-absence pop-out is not mediated by learning throughout the experiment.  
+## Additional analyses
 
+In Experiment 1, we found a clear pop-out effect for color absence in the first trials of the experiment, before participants experienced color pop-out in target-present trials. As per our analysis, this reflects prior metacognitive knowledge about the expected efficiency of color search. In order to terminate the search immediately, participants must have known, implicitly or explicitly, that a red item would have popped out immediately. In the setting of this experiment, this knowledge could not be acquired in previous trials. However, an alternative account is that participants noticed the pop-out of the red distractors in the conjunction trials of block 1, and based their expectation for color pop out on those trials. This account can be directly tested by zeroing in on the subset of participants that performed the two color trials before the two conjunction trials in block 1. This subset of participants showed a clear pop-out effect (`r apa_print(t.test(slopes_wide_color_first$color_absence1,na.rm=TRUE,mu=10, alternative='less'))$full_result`).
+
+
+```{r noerrors, echo=FALSE, cache=TRUE}
+
+no_errors_subjects <-search_df %>%
+  group_by(subj_id) %>%
+  summarise(
+    numcorrect=sum(correct)) %>%
+  filter(
+    numcorrect==12)
+
+no_errors_df <- search_df %>%
+  filter(subj_id %in% no_errors_subjects$subj_id)
+
+median_search_times_no_errors <- no_errors_df %>%
+  filter(include==1) %>%
+  group_by(test_part,set_size,search_type) %>%
+  summarise(mean_trial=mean(trial),
+            median_RT= median(RTfiltered),
+            num_trials=length(RT),
+            sem_RT=se(RTfiltered)*1.2533)%>%
+  mutate(response=test_part=='presence1')
+
+search_slopes_no_errors <- no_errors_df %>%
+  filter(include==1) %>%
+  group_by(search_type) %>%
+  do(model=lm(RT~set_size,data=.)) %>%
+  tidy(model) %>%
+  filter(term=='set_size')
+
+block_names <-  c("Block 1 (Absence)", "Block 2 (Presence)", "Block 3 (Absence)");
+
+# names(block_names) <- c("absence1", "presence1", "absence2");
+# ggplot(data=median_search_times_no_errors,
+#        aes(x=set_size, y=median_RT, color=search_type, fill=search_type, linetype=test_part)) +
+#   geom_line(size=1) +
+#   geom_point(aes(shape = search_type), size=4, color="black",stroke=1.5) +
+#   scale_shape_manual(values=c(21,22))+
+#   scale_fill_manual(values = c("#377eb8", "#e41a1c"))+
+#   scale_color_manual(values = c("#377eb8", "#e41a1c"))+
+#   scale_linetype_manual(values=c("21", "solid","21"))+
+#   facet_grid(cols = vars(test_part))+
+#   geom_errorbar(aes(ymin=median_RT-sem_RT,ymax=median_RT+sem_RT),linetype="solid", width=0.6) +
+#   facet_grid(cols = vars(test_part),
+#              labeller = labeller(test_part = block_names))+
+#   labs(x='set size',y='median RT (seconds)', title='Search time curves') +
+#   theme_bw()+
+#   scale_x_continuous(breaks = c(4,8))+
+#   theme(legend.position='none',
+#         legend.background = element_rect(fill=NA))+
+#   guides(color = FALSE, linetype=FALSE)
+# 
+# ggsave('no_errors.png',dpi=300, width=7, height=5, units='in')
+```
+
+```{r shape_pilot_data, echo=FALSE, cache=TRUE}
+
+shape_pilot_df <- read_csv('../experiments/pilot_shape/data/jatos_results_batch1.csv') %>%
+  rename('subj_id' = 'subject_identifier') %>%
+  mutate(subj_id=factor(subj_id))
+
+shape_pilot_N_total <- shape_pilot_df$subj_id%>%unique()%>%length()
+
+shape_pilot_search_df <- shape_pilot_df %>%
+  filter((test_part=='main')) %>%
+  select('subj_id','test_part','set_size','target_present','correct','RT','search_type') %>%
+  mutate(response = ifelse(correct==1, target_present, 1-target_present)) %>%
+  mutate(trial = sequence(rle(as.character(subj_id))$lengths),
+         i = trial%%4,
+         i = ifelse(i==0,1.5,i-2.5))
+
+minRT <- 250
+maxRTsubj <- 5000 # for subject exclusion
+maxRTtrial <- 1000 #for trial exclusion
+min_acc_search <- 5/6
+
+##exclude subjects
+shape_pilot_excluded <- shape_pilot_search_df %>%
+  group_by(subj_id) %>%
+  summarise(acc = mean(correct),
+            RTlow = quantile(RT,0.25),
+            RThigh = quantile(RT,0.75))%>%
+  filter(acc<min_acc_search | RTlow<minRT | RThigh>maxRTsubj) %>%
+  select('subj_id')
+
+shape_pilot_search_df <- shape_pilot_search_df %>%
+  mutate( include=RT>minRT & 
+            RT<maxRTtrial & correct==1 & 
+            !subj_id%in%excluded$subj_id,
+          RTfiltered = ifelse(include, RT, NA)) 
+
+shape_pilot_search_df$search_type = factor(shape_pilot_search_df$search_type, levels = c('shape','conjunction'))
+
+
+shape_pilot_descriptives <- shape_pilot_search_df %>% 
+  filter(!subj_id%in%shape_pilot_excluded$subj_id) %>%
+  group_by(subj_id) %>%
+  summarise(accuracy=mean(correct), RT=median(RT))
+
+shape_pilot_search_slopes <- shape_pilot_search_df %>%
+  filter(include==1) %>%
+  group_by(subj_id,search_type,response) %>%
+  do(model=lm(RTfiltered~set_size,data=.)) %>%
+  tidy(model) %>%
+  filter(term=='set_size')
+
+shape_pilot_mean_search_slopes <- shape_pilot_search_slopes %>%
+  group_by(search_type,response) %>%
+  summarise('mean_slope'=mean(estimate,na.rm=TRUE),
+            'se_slope' = se(estimate, na.rm=TRUE))
+
+shape_pilot_slopes_wide <- pivot_wider(shape_pilot_search_slopes,
+                           id_cols = 'subj_id',
+                           names_from = c('search_type','response'),
+                           values_from = estimate)
+
+```
 # Experiment 2
 
-Experiment 1 provided unequivocal evidence for perceptual pop-out of color absence prior to experiencing color pop-out in the context of the task. We interpret this as indicating that task-naive adults had valid implicit or explicit metacognitive expectations about color pop-out. This metacognitive knowledge may be innate (acquired in the course of evolution, for example driven by the utility of color search for foraging), learned from previous
-visual experience (for example, first-person experience of attention being immediately drawn to distinct colors), or culturally acquired (for example, through language). To reveal potential learning effects, where experience with visual search affects this metacognitive knowledge, we need participants' prior expectations about search efficiency to be biased or uncertain. This may be the case in searches involving stimuli with which participants are unlikely to have prior experience. Therefore, in Experiment 2 participants will search for an inverted letter among canonically presented letters. In previous studies, inverted-letter searches were highly efficient, with slopes shallower than 10 ms/item [@wang1994familiarity; @malinowski2001effect].  
+Experiment 1 provided unequivocal evidence for color-absence pop-out prior to experiencing color pop-out in the context of the task. We interpret this as indicating that task-naive adults had valid implicit or explicit metacognitive expectations about color pop-out. This metacognitive knowledge may be innate (acquired in the course of evolution, for example driven by the utility of color search for foraging), learned from previous visual experience (for example, first-person experience of attention being immediately drawn to distinct colors), or culturally acquired (for example, through language). Experiment 2 is designed to extend these findings to another stimulus feature that has been found to efficiently guide attention: shape. The time cost of additional distractors in shape search is under 10 ms (`r apa_print(t.test(shape_pilot_slopes_wide$shape_0))$estimate` and `r apa_print(t.test(shape_pilot_slopes_wide$shape_1))$estimate` for target-absent and target-present responses in our pilot data), rendering it a case of parallel, efficient search. It is possible however that unlike in the case of colour, the metacognitive knowledge that gives rise to the pop-out effect for shape-absence is acquired through experience with the task. In this experiment we also include an additional control for prior experience with visual search tasks.
+
+## Procedure
+
+Experiment 2 will be similar to Experiment 1 with two changes. First, the distractors will be red triangles and blue circles for conjunction trials, and red squares for shape trials (see Fig. \@ref(fig:exp2design). Second, participants will be asked to answer the following question when finishing the study:
+
+> Have you ever participated in a similar experiment before, where you were asked to search for a target item? 
+
+In case they answer 'yes', they will be further asked to report how long ago they took part in the experiment, and provide as many details as they can remember about the experiment itself.
+
+
+```{r exp2design, echo=FALSE, fig.cap="Experimental design. Top panel: each visual search trial started with a screen indicating the target stimulus. The search display remained visible until a response is recorded. To motivate accurate responses, the feedback screen remained visible for one second following correct responses and for four seconds following errors. Middle panel: after reading the instructions, participants practiced the visual search task in blocks of 6 trials, until they had reached an accuracy level of 83% correct or higher (at most one error per block of 6 trials). Bottom panel: the main part of the experiment comprised 12 trials only, in which the target was a red circle. Unbeknown the subjects, only trials 5-8 (Block 2) were target-present trials, and the remaining trials were target-absent trials. Each 4-trial block followed a 2 by 2 design, with factors being set size (4 or 8) and distractor type (color or conjunction; blue circles only or blue circles and red squares, respectively).", out.width = '100%'}
+knitr::include_graphics("figures/designExp2.png")
+```
 
 \newpage
 
