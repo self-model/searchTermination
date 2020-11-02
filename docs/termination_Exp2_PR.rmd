@@ -151,6 +151,7 @@ descriptives <- search_df %>%
   group_by(subj_id) %>%
   summarise(accuracy=mean(correct), RT=median(RT))
 ```
+# Experiment 1
 
 # Methods
 We report how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study. <!-- 21-word solution (Simmons, Nelson & Simonsohn, 2012; retrieved from http://ssrn.com/abstract=2160588) -->
@@ -537,7 +538,7 @@ shape_pilot_slopes_wide <- pivot_wider(shape_pilot_search_slopes,
 
 Experiment 1 provided unequivocal evidence for color-absence pop-out prior to experiencing color pop-out in the context of the task. We interpret this as indicating that task-naive adults had valid implicit or explicit metacognitive expectations about color pop-out. This metacognitive knowledge may be innate (acquired in the course of evolution, for example driven by the utility of color search for foraging), learned from previous visual experience (for example, first-person experience of attention being immediately drawn to distinct colors), or culturally acquired (for example, through language). Experiment 2 is designed to extend these findings to another stimulus feature that has been found to efficiently guide attention: shape. The time cost of additional distractors in shape search is under 10 ms (`r apa_print(t.test(shape_pilot_slopes_wide$shape_0))$estimate` and `r apa_print(t.test(shape_pilot_slopes_wide$shape_1))$estimate` for target-absent and target-present responses in our pilot data), rendering it a case of parallel, efficient search. It is possible however that unlike in the case of colour, the metacognitive knowledge that gives rise to the pop-out effect for shape-absence is acquired through experience with the task. In this experiment we also include an additional control for prior experience with visual search tasks.
 
-## Procedure
+# Procedure
 
 Experiment 2 will be similar to Experiment 1 with two changes. First, the distractors will be red triangles and blue circles for conjunction trials, and red squares for shape trials (see Fig. \@ref(fig:exp2design). Second, participants will be asked to complete a short debriefing questionnaire upon finishing the study. The first question (Q1) will be:
 
@@ -559,23 +560,23 @@ knitr::include_graphics("figures/designExp2.png")
 knitr::include_graphics("figures/debrief.png")
 ```
 
-### Randomization
+## Randomization
 
 The order and timing of experimental events will be determined pseudo-randomly by the Mersenne Twister pseudorandom number generator, initialized in a way that ensures registration time-locking [@mazor2019novel]. 
 
-## Data analysis
+# Data analysis
 
-### Rejection criteria
+## Rejection criteria
 
 Participants will be excluded for making more than one error in the main part of the experiment, or for having extremely fast or slow reaction times (below 250 milliseconds or above 5 seconds) in more than 25% of the trials. 
 
 Error trials, and trials with response time below 250 milliseconds or above 1 second will be excluded from the response-time analysis.
 
-### Data preprocessing
+## Data preprocessing
 
 To control for within-block trial order effects, a separate linear regression model will be fit to the data of each block, predicting search time as a function of trial serial order ($RT \sim \beta_0+\beta_1i$, with $i$ denoting the mean-centered serial position within a block). Search times will be corrected by subtracting the product of the slope and the mean-centered serial position, in a block-wise manner.
 
-### Hypotheses and analysis plan
+## Hypotheses and analysis plan
 
 Experiment 2 is designed to test several hypotheses about the contribution of metacognitive knowledge to search termination in the case of color search, the state of this knowledge prior to engaging with the task, and the effect of experience trials on this metacognitive knowledge. We outline some possible search time patterns and their interpretation in Fig. \@ref(fig:models2). 
 
