@@ -14,7 +14,9 @@
         <script src="jspsych-6.1.0/plugins/jspsych-survey-text.js"></script>
         <script src="jspsych-6.1.0/plugins/jspsych-survey-multi-choice.js"></script>
         <script src="jspsych-6.1.0/plugins/jspsych-external-html.js"></script>
+        <script src="jspsych-6.1.0/plugins/jspsych-free-sort.js"></script>
         <script src="p5/p5.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
         <link href="https://fonts.googleapis.com/css2?family=Corben&family=Quicksand&display=swap" rel="stylesheet">
         <link href="style.css" rel="stylesheet" type="text/css"></link>
     </head>
@@ -219,10 +221,10 @@
         {target_present:false,
         set_size: 4,
         target_function: drawRedCircle,
-        distractor_function: drawBlueCircle,
+        distractor_function: drawRedSquare,
         data: {correct_response: 'f',
               test_part: 'absence1',
-              search_type: 'color'},
+              search_type: 'shape'},
         },
         {target_present:false,
         set_size: 4,
@@ -235,10 +237,10 @@
         {target_present:false,
         set_size: 8,
         target_function: drawRedCircle,
-        distractor_function: drawBlueCircle,
+        distractor_function: drawRedSquare,
         data: {correct_response: 'f',
               test_part: 'absence1',
-              search_type: 'color'},
+              search_type: 'shape'},
         },
         {target_present:false,
         set_size: 8,
@@ -255,10 +257,10 @@
         {target_present:true,
         set_size: 4,
         target_function: drawRedCircle,
-        distractor_function: drawBlueCircle,
+        distractor_function: drawRedSquare,
         data: {correct_response: 'j',
               test_part: 'presence1',
-              search_type: 'color'},
+              search_type: 'shape'},
         },
         {target_present:true,
         set_size: 4,
@@ -271,10 +273,10 @@
         {target_present:true,
         set_size: 8,
         target_function: drawRedCircle,
-        distractor_function: drawBlueCircle,
+        distractor_function: drawRedSquare,
         data: {correct_response: 'j',
               test_part: 'presence1',
-              search_type: 'color'},
+              search_type: 'shape'},
         },
         {target_present:true,
         set_size: 8,
@@ -291,10 +293,10 @@
         {target_present:false,
         set_size: 4,
         target_function: drawRedCircle,
-        distractor_function: drawBlueCircle,
+        distractor_function: drawRedSquare,
         data: {correct_response: 'f',
               test_part: 'absence2',
-              search_type: 'color'},
+              search_type: 'shape'},
         },
         {target_present:false,
         set_size: 4,
@@ -307,10 +309,10 @@
         {target_present:false,
         set_size: 8,
         target_function: drawRedCircle,
-        distractor_function: drawBlueCircle,
+        distractor_function: drawRedSquare,
         data: {correct_response: 'f',
               test_part: 'absence2',
-              search_type: 'color'},
+              search_type: 'shape'},
         },
         {target_present:false,
         set_size: 8,
@@ -346,6 +348,54 @@
       timeline.push(absence1)
       timeline.push(presence)
       timeline.push(absence2)
+
+      var stimuli_to_sort = ['stimuli/shape4.png', 'stimuli/shape8.png', 'stimuli/conj4.png', 'stimuli/conj8.png']
+
+      var sort_trial = {
+          type: 'free-sort',
+          stimuli: stimuli_to_sort,
+          sort_area_height: 100,
+          sort_area_width: 450,
+          prompt: "<p>Some searches are easier than others. "+
+          "This means that participants find the red dot faster when hidden among some sets of distractors, compared to others. "+
+          "To the best of your ability, order the following distractor sets from easiest (fastest, left) to hardest (slowest, right).</p>"+
+          "</br>"
+      };
+
+      timeline.push(sort_trial)
+
+      var Q2 = {
+        type:'survey-multi-choice',
+        questions: [{prompt: "Have you ever participated in a similar experiment before, where you were asked to search for a target item?",
+        name: 'Q2',
+        options: ["yes","no"],
+        required:true,
+        horizontal:true}],
+      }
+      timeline.push(Q2)
+
+      var Q2debrief = {
+        type: 'survey-text',
+        preamble: '<h1>Tell us more</h1>',
+        questions: [{
+          prompt: "In one or two sentences, describe this other experiment. " +
+          "When was it?",
+          pleaceholder: "Provide more details",
+          rows:8,
+          columns:60,
+          name: 'Q2debrief'
+        }]
+      };
+
+    var if_node = {
+      timeline:[Q2debrief],
+      conditional_function:function() {
+        var Q2answer = JSON.parse(jsPsych.data.getLastTrialData().values()[0].responses)['Q2']
+        if (Q2answer=='yes') {return true} else {return false}
+      }
+    }
+
+    timeline.push(if_node)
 
       var worker_comments = {
         type: 'survey-text',
@@ -387,7 +437,7 @@
 
 timeline=makeTimeline()
 jsPsych.init({
-preload_images: ['stimuli/keyboard_layout.png'],
+preload_images: ['stimuli/keyboard_layout.png', 'stimuli/shape4.png', 'stimuli/shape8.png', 'stimuli/conj4.png', 'stimuli/conj8.png'],
   timeline: timeline,
   on_finish: function() {
 	  jsPsych.data.addProperties({followed_instructions: window.followed_instructions});

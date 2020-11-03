@@ -95,9 +95,10 @@ jsPsych.plugins['free-sort'] = (function() {
 
     // store initial location data
     var init_locations = [];
+    var shuffled_locations = shuffle([{x:10,y:0},{x:120,y:0},{x:230,y:0},{x:340,y:0}]);
 
     for (var i = 0; i < trial.stimuli.length; i++) {
-      var coords = random_coordinate(trial.sort_area_width - trial.stim_width, trial.sort_area_height - trial.stim_height);
+      var coords = shuffled_locations[i]
 
       display_element.querySelector("#jspsych-free-sort-arena").innerHTML += '<img '+
         'src="'+trial.stimuli[i]+'" '+
@@ -180,14 +181,24 @@ jsPsych.plugins['free-sort'] = (function() {
 
   // helper functions
 
-  function random_coordinate(max_width, max_height) {
-    var rnd_x = Math.floor(Math.random() * (max_width - 1));
-    var rnd_y = Math.floor(Math.random() * (max_height - 1));
 
-    return {
-      x: rnd_x,
-      y: rnd_y
-    };
+  function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
   }
 
   return plugin;

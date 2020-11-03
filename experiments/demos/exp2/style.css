@@ -188,3 +188,14 @@ button, input, select, textarea {
   padding: 0.5rem;
   background: hsl(160, 60%, 50%);
 }
+
+.jspsych-survey-multi-choice-question {
+margin-top: 2em;
+margin-bottom: 2em;
+font-size: 24px;
+}
+
+.jspsych-survey-multi-choice-text {
+color: white;
+font-size: 24px;
+}
