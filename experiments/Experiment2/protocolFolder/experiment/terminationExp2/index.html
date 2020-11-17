@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>termination</title>
+        <script src="jatos.js"></script>
+        <script src="jquery/jquery.min.js"></script>
+        <script src="jspsych-6.1.0/jspsych.js"></script>
+        <script src="jspsych-6.1.0/plugins/jspsych-fullscreen.js"></script>
+        <script src="jspsych-6.1.0/plugins/jspsych-html-keyboard-response.js"></script>
+        <script src="jspsych-6.1.0/plugins/jspsych-p5vs_yn.js"></script>
+        <script src="jspsych-6.1.0/plugins/jspsych-p5text.js"></script>
+        <script src="jspsych-6.1.0/plugins/jspsych-call-function.js"></script>
+        <script src="jspsych-6.1.0/plugins/jspsych-instructions.js"></script>
+        <script src="jspsych-6.1.0/plugins/jspsych-survey-text.js"></script>
+        <script src="jspsych-6.1.0/plugins/jspsych-survey-multi-choice.js"></script>
+        <script src="jspsych-6.1.0/plugins/jspsych-external-html.js"></script>
+        <script src="jspsych-6.1.0/plugins/jspsych-free-sort.js"></script>
+        <script src="p5/p5.min.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Corben&family=Quicksand&display=swap" rel="stylesheet">
+        <link href="style.css" rel="stylesheet" type="text/css"></link>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+        <script src="mersenne-twister.js"></script>
+    </head>
+    <body></body>
+    <script>
+
+    window.practice_loop = 0;
+    window.followed_instructions = true;
+
+    function makeTimeline() {
+
+      timeline = [];
+
+       timeline.push({
+         type: 'fullscreen',
+         fullscreen_mode: true
+       });
+
+
+       // Instructions
+       var instructions = {
+           type: 'instructions',
+           pages: function() {return [
+               '<p>Welcome to the experiment! Click next or use the space bar to move to the next screen.',
+               '<p>In this experiment, you will search for one target shape among other shapes, '+
+               'presented in a square.</p>'+
+               '<p>Click on the <strong>J</strong> key if the target shape is in the square, or on the <strong>F</strong> '+
+               'key if it is not there. Be accurate and quick!</p>',
+               '<p>For your convenience, I suggest you position your '+
+               'hands like this:</p></br><img src="stimuli/keyboard_layout.png" width="40%" class="center">',
+               '<p>Let\'s start with a few practice trials, '+
+               'in which you will be searching for a rotated T.</p>'
+           ]},
+           show_clickable_nav: true,
+           key_forward: 'space'
+       }
+
+       timeline.push(instructions)
+
+       var drawT = function(p,t,du) {
+         p.strokeWeight(3)
+         p.stroke('black')
+         p.line(-du/20,0,du/20,0)
+         p.line(-du/20,-du/20,-du/20,du/20)
+       }
+
+       var drawL = function(p,t,du) {
+         p.strokeWeight(3)
+         p.stroke('black')
+         p.line(-du/20,du/20,du/20,du/20)
+         p.line(-du/20,-du/20,-du/20,du/20)
+       }
+
+       var drawRedCircle  = function(p,t,du) {
+         p.strokeWeight(0)
+         p.fill(255,0,0)
+         p.circle(0,0,du/10)
+       }
+
+       var drawBlueCircle  = function(p,t,du) {
+         p.strokeWeight(0)
+         p.fill(0,0,255)
+         p.circle(0,0,du/10)
+       }
+
+       var drawRedSquare  = function(p,t,du) {
+         p.strokeWeight(0)
+         p.fill(255,0,0)
+         p.square(0,0,du/10)
+       }
+
+       var drawRedTriangle  = function(p,t,du) {
+         p.strokeWeight(0)
+         p.fill(255,0,0)
+         p.triangle(-du/2, du*p.sqrt(3)/4, du/2, du*p.sqrt(3)/4,
+         0, -du*p.sqrt(3)/4)
+       }
+
+       var conjunction = function(p,t,du,dist_num) {
+         if (dist_num%2==0) {drawBlueCircle(p,t,du)}
+         else {drawRedTriangle(p,t,du/10)}
+       }
+
+
+       var vs_trial = {
+         type: "p5vs_yn",
+         target_function:jsPsych.timelineVariable('target_function'),
+         distractor_function:jsPsych.timelineVariable('distractor_function'),
+         set_size:jsPsych.timelineVariable('set_size'),
+         target_present: jsPsych.timelineVariable('target_present'),
+         set_size:jsPsych.timelineVariable('set_size'),
+           on_finish: function(data){
+           data.correct = data.response == data.correct_response;
+         },
+         data: jsPsych.timelineVariable('data')
+       };
+
+       var feedback = {
+         type: 'html-keyboard-response',
+         stimulus: function(){
+           var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
+           if(last_trial_correct){
+             return "<div style=\"width:150px;height:56px;font-size:30px;text-align:center;\">correct!</div>";
+           } else {
+             return "<div style=\"width:150px;height:56px;border:0px;font-size:30px;text-align:center\">wrong.</div>"
+           }
+         },
+         trial_duration: function(){
+           var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
+           if(last_trial_correct){
+             return 1000;
+           } else {
+             return 1500
+           }
+         },
+         response_ends_trial: false
+       }
+
+       var presence_array = [[false,'f'],[true,'j']]
+
+       practice_vars = [
+
+         {target_present:true,
+         set_size: 3,
+         target_function: drawT,
+         distractor_function: drawL,
+         data: {correct_response: 'j',
+               test_part: 'practice'},
+         },
+          {target_present:false,
+         set_size: 3,
+         target_function: drawT,
+         distractor_function: drawL,
+         data: {correct_response: 'f',
+               test_part: 'practice'},
+         }
+       ]
+
+       var practice = {
+         timeline: [vs_trial, feedback],
+         timeline_variables: practice_vars,
+         repetitions: 3,
+         randomize_order: true
+       }
+
+       var introduce_vs = {
+         type: "p5Text",
+         title: 'Let\'s try again',
+         text: function() {
+            var trials = jsPsych.data.get().last(12).filter({test_part: 'practice'});
+            var num_correct = trials.filter({correct: true}).count();
+            var mean_RT= trials.select('RT').mean()/1000;
+         return "You got "+num_correct+" searches right out of 6, and your average "+
+         "response time was "+ mean_RT.toPrecision(2)+" seconds. Let's try again. Your task is to decide "  +
+         "whether a rotated T appears inside a square or not. press 'J' "+
+         "for 'yes' and 'F' for 'no'. You will only use your keyboard for this challenge, so "+
+         "we recommend placing your right and left index fingers on the 'J' and 'F' keys.\n"+
+         "Be accurate and quick."}
+       };
+
+       var practice_loop_node = {
+           timeline: [{timeline: [introduce_vs], conditional_function: function() {return window.practice_loop>0}}, practice],
+           loop_function: function(data){
+               // get the data from the previous trial,
+               // and check which key was pressed
+               var num_correct = data.filter({correct: true}).count();
+               if(num_correct>4){
+                   return false;
+               } else {
+                  window.practice_loop++
+                  return true;
+               }
+           }
+       }
+
+      timeline.push(practice_loop_node)
+
+      // Instructions
+      var main_part_instructions = {
+          type: 'instructions',
+          pages: function() {
+               var trials = jsPsych.data.get().last(12).filter({test_part: 'practice'});
+               var num_correct = trials.filter({correct: true}).count();
+               var mean_RT= trials.select('RT').mean()/1000;
+               return [
+              '<p>Excellent. '+
+              "You got "+num_correct+" searches right out of 6, and your average "+
+              "response time was "+ mean_RT.toPrecision(2)+" seconds. "+
+              'we are now ready to move on to the main part of the experiment. This '+
+              'time your target will be a red circle.'+
+              '<p>Click on the <strong>J</strong> key if the red circle is in the square, or on the <strong>F</strong> '+
+              'key if it is not there. Be accurate and quick!</p>',
+              '<p>You will perform 12 repetitions of searching for a red circle. As before, be accuracy and quick! Good luck!</p>'
+          ]},
+          show_clickable_nav: true,
+          key_forward: 'space'
+      }
+      timeline.push(main_part_instructions)
+
+      absence1_vars = [
+
+        {target_present:false,
+        set_size: 4,
+        target_function: drawRedCircle,
+        distractor_function: drawRedSquare,
+        data: {correct_response: 'f',
+              test_part: 'absence1',
+              search_type: 'shape'},
+        },
+        {target_present:false,
+        set_size: 4,
+        target_function: drawRedCircle,
+        distractor_function: conjunction,
+        data: {correct_response: 'f',
+              test_part: 'absence1',
+              search_type: 'conjunction'},
+        },
+        {target_present:false,
+        set_size: 8,
+        target_function: drawRedCircle,
+        distractor_function: drawRedSquare,
+        data: {correct_response: 'f',
+              test_part: 'absence1',
+              search_type: 'shape'},
+        },
+        {target_present:false,
+        set_size: 8,
+        target_function: drawRedCircle,
+        distractor_function: conjunction,
+        data: {correct_response: 'f',
+              test_part: 'absence1',
+              search_type: 'conjunction'},
+        }
+      ];
+
+      presence_vars = [
+
+        {target_present:true,
+        set_size: 4,
+        target_function: drawRedCircle,
+        distractor_function: drawRedSquare,
+        data: {correct_response: 'j',
+              test_part: 'presence1',
+              search_type: 'shape'},
+        },
+        {target_present:true,
+        set_size: 4,
+        target_function: drawRedCircle,
+        distractor_function: conjunction,
+        data: {correct_response: 'j',
+              test_part: 'presence1',
+              search_type: 'conjunction'},
+        },
+        {target_present:true,
+        set_size: 8,
+        target_function: drawRedCircle,
+        distractor_function: drawRedSquare,
+        data: {correct_response: 'j',
+              test_part: 'presence1',
+              search_type: 'shape'},
+        },
+        {target_present:true,
+        set_size: 8,
+        target_function: drawRedCircle,
+        distractor_function: conjunction,
+        data: {correct_response: 'j',
+              test_part: 'presence1',
+              search_type: 'conjunction'},
+        }
+      ];
+
+      absence2_vars = [
+
+        {target_present:false,
+        set_size: 4,
+        target_function: drawRedCircle,
+        distractor_function: drawRedSquare,
+        data: {correct_response: 'f',
+              test_part: 'absence2',
+              search_type: 'shape'},
+        },
+        {target_present:false,
+        set_size: 4,
+        target_function: drawRedCircle,
+        distractor_function: conjunction,
+        data: {correct_response: 'f',
+              test_part: 'absence2',
+            search_type: 'conjunction'},
+        },
+        {target_present:false,
+        set_size: 8,
+        target_function: drawRedCircle,
+        distractor_function: drawRedSquare,
+        data: {correct_response: 'f',
+              test_part: 'absence2',
+              search_type: 'shape'},
+        },
+        {target_present:false,
+        set_size: 8,
+        target_function: drawRedCircle,
+        distractor_function: conjunction,
+        data: {correct_response: 'f',
+              test_part: 'absence2',
+              search_type: 'conjunction'},
+        }
+      ];
+
+      var absence1 = {
+        timeline: [vs_trial, feedback],
+        timeline_variables: absence1_vars,
+        repetitions: 1,
+        randomize_order: true
+      }
+
+      var presence = {
+        timeline: [vs_trial, feedback],
+        timeline_variables: presence_vars,
+        repetitions: 1,
+        randomize_order: true
+      }
+
+      var absence2 = {
+        timeline: [vs_trial, feedback],
+        timeline_variables: absence2_vars,
+        repetitions: 1,
+        randomize_order: true
+      }
+
+      timeline.push(absence1)
+      timeline.push(presence)
+      timeline.push(absence2)
+
+      var stimuli_to_sort = ['stimuli/shape4.png', 'stimuli/shape8.png', 'stimuli/conj4.png', 'stimuli/conj8.png']
+
+     //I've made some changes to the original jsPsych plugin.
+      var sort_trial = {
+          type: 'free-sort',
+          stimuli: stimuli_to_sort,
+          sort_area_height: 100,
+          sort_area_width: 800,
+          prompt: "<p>Some searches are easier than others. "+
+          "This means that participants find the red circle faster when hidden among some sets of distractors, compared to others. "+
+          "To the best of your ability, order the following distractor sets from easiest (fastest, left) to hardest (slowest, right).</p>"+
+          "</br>"
+      };
+
+      timeline.push(sort_trial)
+
+      var Q2 = {
+        type:'survey-multi-choice',
+        questions: [{prompt: "Have you ever participated in a similar experiment before, where you were asked to search for a target item?",
+        name: 'Q2',
+        options: ["yes","no"],
+        required:true,
+        horizontal:true}],
+      }
+      timeline.push(Q2)
+
+      var Q2debrief = {
+        type: 'survey-text',
+        preamble: '<h1>Tell us more</h1>',
+        questions: [{
+          prompt: "In one or two sentences, describe this other experiment. " +
+          "When was it?",
+          pleaceholder: "Provide more details",
+          rows:8,
+          columns:60,
+          name: 'Q2debrief'
+        }]
+      };
+
+    var if_node = {
+      timeline:[Q2debrief],
+      conditional_function:function() {
+        var Q2answer = JSON.parse(jsPsych.data.getLastTrialData().values()[0].responses)['Q2']
+        if (Q2answer=='yes') {return true} else {return false}
+      }
+    }
+
+    timeline.push(if_node)
+
+      var worker_comments = {
+        type: 'survey-text',
+        preamble: '<h1>Your Thoughts<h1>',
+        questions: [{
+        prompt: "That's it! Before we thank you, we would appreciate if you could share " +
+        "any thoughts you had about the experiment, or anything we should "+
+        "take into account when analyzing your data.",
+        pleaceholder: "your comments here",
+        rows:8,
+        columns:60,
+        name: 'worker_comments'
+      }]
+    };
+      timeline.push(worker_comments);
+
+      var thank_you = {
+        type: 'p5Text',
+        title: "Thank you!",
+        text: "Thanks for your time and effort. Your contribution will help us " +
+              "learn about the way people make decisions about what they see."
+      };
+
+      timeline.push({
+      type: 'fullscreen',
+      fullscreen_mode: false
+    });
+
+    timeline.push(thank_you);
+    return timeline
+    }
+
+        function hexToBytes(hex) {
+            for (var bytes = [], c = 0; c < hex.length; c += 2)
+            bytes.push(parseInt(hex.substr(c, 2), 16));
+            return bytes;
+        }
+
+      /* start the experiment */
+      jatos.onLoad(function () {
+        console.log('version 1')
+        var m = new MersenneTwister();
+        Math.random = function() {return m.random()};
+        var protocol_sum = jatos.studyJsonInput.protocol_sum
+        var subject_identifier = jatos.urlQueryParameters.PROLIFIC_PID
+        subject_sum = hexToBytes(
+          CryptoJS.SHA256(
+            protocol_sum+subject_identifier).toString()
+          )
+        m.init_by_array(subject_sum, subject_sum.length)
+        jsPsych.data.addProperties({'protocol_sum':protocol_sum,
+        'subject_identifier':subject_identifier, 'subject_sum':subject_sum});
+        timeline=makeTimeline()
+          jsPsych.init({
+            preload_images: ['stimuli/keyboard_layout.png'],
+              timeline: timeline,
+              on_finish: function() {
+                  jsPsych.data.addProperties(jatos.urlQueryParameters);
+                  jsPsych.data.addProperties({followed_instructions: window.followed_instructions});
+                  var resultJson = jsPsych.data.get().json();
+                  jatos.submitResultData(resultJson, jatos.startNextComponent);
+              }
+          });
+      });
+
+    </script>
+</html>

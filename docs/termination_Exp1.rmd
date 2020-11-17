@@ -261,7 +261,7 @@ Pre-registered hypotheses 3-5 were designed to test for a learning effect betwee
 *Hypothesis 5*: In case of a learning effect for pop-out search, Hypothesis 5 was designed to test the specificity of this effect to color pop-out by computing an interaction of block number and search type. Given that no learning effect has been observed, this test makes little sense. For completeness, we report that the change in slope between blocks 1 and 3 was similar for color and conjunction search (`r apa_print(t.test(slopes_wide$color_absence1-slopes_wide$color_absence2-slopes_wide$conjunction_absence1+slopes_wide$conjunction_absence2,na.rm=TRUE))$full_result`). 
 
 
-```{r exp1Plot, echo=FALSE, fig.cap="Median search time by distractor set size for the two search tasks across the three blocks. Correct responses only. Error bars represent the standard error of the median."}
+```{r exp1Plot, echo=FALSE, fig.cap="Upper panel: median search time by distractor set size for the two search tasks across the three blocks. Correct responses only. Lower panel: accuracy as a function of block, set size and search type. Error bars represent the standard error of the median."}
 
 block_names <-  c("Block 1 (Absence)", "Block 2 (Presence)", "Block 3 (Absence)");
 
