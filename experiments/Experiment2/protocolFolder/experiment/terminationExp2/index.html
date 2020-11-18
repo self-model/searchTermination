@@ -361,7 +361,10 @@
           prompt: "<p>Some searches are easier than others. "+
           "This means that participants find the red circle faster when hidden among some sets of distractors, compared to others. "+
           "To the best of your ability, order the following distractor sets from easiest (fastest, left) to hardest (slowest, right).</p>"+
-          "</br>"
+          "</br>",
+          data: {
+            test_part: 'sort_trial'
+          }
       };
 
       timeline.push(sort_trial)
@@ -373,6 +376,9 @@
         options: ["yes","no"],
         required:true,
         horizontal:true}],
+        data: {
+          test_part: 'prior_experience1'
+        }
       }
       timeline.push(Q2)
 
@@ -385,8 +391,11 @@
           pleaceholder: "Provide more details",
           rows:8,
           columns:60,
-          name: 'Q2debrief'
-        }]
+          name: 'Q2debrief',
+        }],
+        data: {
+          test_part: 'prior_experience2'
+        }
       };
 
     var if_node = {
