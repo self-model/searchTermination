@@ -165,18 +165,24 @@ jsPsych.plugins['free-sort'] = (function() {
         });
       }
 
-      var trial_data = {
-        "init_locations": JSON.stringify(init_locations),
-        "moves": JSON.stringify(moves),
-        "final_locations": JSON.stringify(final_locations),
-        "rt": rt
-      };
+      //enable pressing button only if something has changed relative to the original display
+      if (init_locations[0]['x'] !== final_locations[0]['x'] |
+         init_locations[1]['x'] !== final_locations[1]['x'] |
+         init_locations[2]['x'] !== final_locations[2]['x'] |
+         init_locations[3]['x'] !== final_locations[3]['x']) {
 
-      // advance to next part
-      display_element.innerHTML = '';
-      jsPsych.finishTrial(trial_data);
+        var trial_data = {
+          "init_locations": JSON.stringify(init_locations),
+          "moves": JSON.stringify(moves),
+          "final_locations": JSON.stringify(final_locations),
+          "rt": rt
+        };
+
+        // advance to next part
+        display_element.innerHTML = '';
+        jsPsych.finishTrial(trial_data);
+      }
     });
-
   };
 
   // helper functions
