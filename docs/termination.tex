@@ -37,9 +37,8 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
-  pdftitle={Visual search schema and search termination},
+  pdftitle={Zero-shot search termination reveals a dissociation between implicit and explicit metacognitive knowledge},
   pdflang={en-EN},
-  pdfkeywords={Visual search, metacognition, absence, attention-schema},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
@@ -106,18 +105,14 @@
   {\section*{\normalfont\normalsize\abstractname}}
   {}{\typeout{Failed to patch abstract.}}
 \makeatother
-\shorttitle{termination}
+\shorttitle{Zero-shot termination}
 \author{Matan Mazor\textsuperscript{1}\ \& Stephen M. Fleming\textsuperscript{1,2,3}}
 \affiliation{
 \vspace{0.5cm}
 \textsuperscript{1} Wellcome Centre for Human Neuroimaging, UCL\\\textsuperscript{2} Max Planck UCL Centre for Computational Psychiatry and Ageing Research\\\textsuperscript{3} Department of Experimental Psychology, UCL}
-\authornote{Add complete departmental affiliations for each author here. Each new line herein must be indented, like this line.
-
-Enter author note here.
-
+\authornote{
 
 Correspondence concerning this article should be addressed to Matan Mazor, 12 Queen Square, London WC1N 3BG. E-mail: mtnmzor@gmail.com}
-\keywords{Visual search, metacognition, absence, attention-schema\newline\indent Word count: X}
 \DeclareDelayedFloatFlavor{ThreePartTable}{table}
 \DeclareDelayedFloatFlavor{lltable}{table}
 \DeclareDelayedFloatFlavor*{longtable}{table}
@@ -136,12 +131,12 @@ Correspondence concerning this article should be addressed to Matan Mazor, 12 Qu
   \usepackage[shorthands=off,main=english]{babel}
 \fi
 
-\title{Visual search schema and search termination}
+\title{Zero-shot search termination reveals a dissociation between implicit and explicit metacognitive knowledge}
 
 \date{}
 
 \abstract{
-When searching for a target object among distractors, search time varies as a function of the number of distractors and their similarity to the target object. This is true not only for the time taken to find the target object, but also for the time taken to conclude that a target object is absent. Search termination is often assumed to involve some (implicit or explicit) metacognitive knowledge about the expected difficulty of the search, or the expected salience of a hypothetical target in the given array of distractors. In common experimental designs, target-present and target-absent trials are intermixed, allowing subjects to form search-time expectations based on target-present trials, and use these expectations in target-absent trials to terminate search. This mixed design makes it impossible to dissociate between metacognitive knowledge that is available prior to performing the task, and knowledge that is acquired based on recent experience. By determining the order of target-present and target-absent trials, here we control participants' ability to base their search termination on task experience. This allows us to probe metacognitive knowledge before engaging with the task, and the effect of experience on the shaping of this knowledge.
+In order to infer that a target item is missing from a display, subjects must know that they would have detected it if it was present. This form of counterfactual reasoning critically relies on metacognitive knowledge about spatial attention and visual search behaviour. Previous work on visual search established that this knowledge is constructed and expanded based on task experience. Here we show that some metacognitive knowledge is also available to participants in the first few trials of the task, and that this knowledge can be used to guide decisions about search termination even if it is not available for explicit report.
 }
 
 \begin{document}
@@ -150,44 +145,41 @@ When searching for a target object among distractors, search time varies as a fu
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
 
-In visual search tasks, participants report the presence or absence of a target stimulus among distractor stimuli. While \enquote{Target Present} responses are simply triggered by the detection of a target, what triggers \enquote{Target Absent} responses is a more difficult question, and different accounts of visual search propose different termination mechanisms. In serial self-terminating search, participants scan items in random order until a target is detected or until all items have been scanned, at which point a \enquote{Target Absent} response is given. While this model successfully accounts for some observations, it fails to explain search time patterns in highly efficient searches (like when searching for red among green items), where the timing of \enquote{Target Absent} responses is virtually independent of the number of distractors. More advanced models propose that search is terminated once participants exhaust some subset of the stimuli, chosen preattentively and in a manner that optimizes speed and accuracy {[}Guided Search; {]}, that the probability of quitting a search increases following the scanning of each item {[}{]}, or that search is terminated by means of a stochastic timer. Common to these models is the need in prior knowledge about expected search time or efficiency. In order to conclude that a target is missing from the display after scanning only a subset of items, subjects need to know that a target would have already been selected for attention, if present. Similarly, the search timer should only go off once chances are that a target would have already been found. But where does this knowledge come from?
+Searching for the only blue letter in an array of yellow letters is easy, but searching for the only blue X among an array of yellow Xs and blue Ts is much harder (Treisman \& Gelade, 1980). This difference manifests in the time taken to find the target letter, but also in the time taken to conclude that the target letter is missing. In other words, easier searches not only make it easier to detect the presence of a target, but also to infer its absence. Differences in the speed of detecting the presence of a target have been attributed to pre-attentional mechanisms (Treisman \& Gelade, 1980) and guiding signals (Wolfe, 2021; Wolfe \& Gray, 2007), that can sometimes make the target item \enquote{pop out} immediately, without any attentional effort. In target-absent trials, however, there is nothing in the display to pop-out. This reasis a fundamental question: what makes some decisions about target absence easier than others?
 
-Beliefs about the expected time taken to detect a target can draw on previous experience in the task. Indeed, search time in target absent trials decreases following successful target present trials, and sharply increases following target misses (Chun \& Wolfe, 1996). This heuristic is limited to repetitive searches of the same target in similar displays, as is often the case in visual search experiments. However, in everyday life visual searches are often performed only once, such that relying on previous repetitions of the same search is impossible. Furthermore, search time information from previous trials is not available for the first trial in the experiment. Thus, search time in the first several trials reflect subjects' prior beliefs about search efficiency, prior to engaging with the task. This fact makes these trials a window into participants' intuitive theory of attention and visual search. Furthermore, participants' ability to learn from positive examples (Target Present trials), and their ability to generalize their knowledge across stimulus types and displays, offers an opportunity to study the structure of this intuitive knowledge, and the inductive biases that guide its acquisition. In this study, we use Target Absent trials in visual search to ask what participants know about their spatial attention before engaging with the visual search task, and how this knowledge is built and expanded based on experience.
+Models of search termination explain the \emph{pop-out} effect for target absence (the immediate recognition that a target is missing) by postulating implicit or explicit implementations of counterfactual beliefs about finding a hypothetical target. For example, in some versions of the Guided Search model, search termination was the result of an exhaustive search on those items that surpassed a learned \emph{activation threshold}: an internal variable that is flexibly adapted to maximize accuracy and response time (Chun \& Wolfe, 1996; Wolfe, 1994). Setting the activation threshold high reflects the belief that a target item would be highly salient, allowing participants to ignore non-salient distractors. In another variant of the Guided Search model, search termination was proposed to be the result of probabilistically selecting a \emph{quit unit} (Moran, Zehetleitner, Müller, \& Usher, 2013). The probability of selecting the quit unit in this model was a function of a several factors, including a free parameter that indexes counterfactual beliefs about finding a target, had it been present. In Guided Search 6.0 (Wolfe, 2021), search termination is triggered by a noisy \emph{quitting signal} accumulator reaching a \emph{quitting threshold}, which again can be adapted to maximize long-time search efficiency. Finally, in a fixation-based model of visual search, the number of items that are concurrently scanned within a single fixation (the \emph{functional visual field}) was dependent on search difficulty: with more items for easy searches and less items for more difficult ones (Hulleman \& Olivers, 2017). In all four models, metacognitive beliefs about search efficiency are crucial for adapting the search termination strategy to different environments and world states, implemented as an activation or a quitting threshold, a quitting parameter, or the size of a functional visual field.
 
-Specifically, we focus on the pop-out effect for color search: When searching for a deviant color, search time is nearly unaffected by the number of distractors for Target Present and Target Absent responses alike. In a series of three experiments we ask whether and how the color pop-out effect for target-absent trials is dependent on prior experience with the task and stimuli. Unlike typical visual search experiments that comprise hundreds or thousands of trials, here we collect only a handful of trials from a large pool of online participants (N=X). This unusual design allows us to investigate search time patterns in the first trials of the experiment. Furthermore, by making sure that the first displays do not include the target stimulus, we ask what knowledge is available to participants about their expected search efficiency prior to engaging with the task. The presence of a pop-out effect in target-absent trials prior to any target-present trials would indicate that knowledge about the salience of a divergent color is available at some form in the cognitive system, and that this knowledge can flexibly be put to use for counterfactual reasoning in the process of inference about absence. Conversely, the absence of a pop-out effect would mean that positive experience is necessary for this knowledge to be acquired, or to be expressed.
+Metacognitive beliefs about the expected time taken to detect a target can draw on previous experience in the task. Indeed, search time in target-absent trials decreases following successful target-present trials, and sharply increases following target misses (Chun \& Wolfe, 1996). This simple heuristic provided an excellent fit to data from a visual search task with hundreds of trials. However, in everyday life visual searches rarely come in a blocks of hundreds of similar trials, such that relying on previous repetitions of the same search to guide search termination is impossible. Only the first trials of a visual search experiment, where participants meet the stimuli for the first time, are a good model of this \emph{zero-shot search termination} behaviour. In these trials, search time should rely solely on metacognitive beliefs about search efficiency that are available to subjects prior to engaging with the task. This fact makes search time in the first few trials of a task a critical window into participants' metacognitive knowledge about attention and visual search. Furthermore, participants' ability to learn from positive examples (target-present trials), and their ability to generalize their knowledge across stimulus types and displays, offers an opportunity to study the structure of this simplified metacognitive knowledge, its building blocks, and the inductive biases that guide its acquisition. In this study, we use target-absent trials in visual search to ask what participants know about their spatial attention before engaging with the visual search task, and how this knowledge is built and expanded based on experience.
 
-In a series of three experiments we ask what portion of this implicit metacognitive knowledge about search efficiency is available prior to engaging with the task, how it is expanded based on positive samples, and how it is used to make efficient inference about absence. In these experiments, target-present trials are used as learning samples (where subjects observe how efficiently they can find a target), and target-absent trials are used as test trials (where subjects terminate the search when they believe a target would have been found). By testing participants' prior knowledge state, and their ability to learn and generalize across different factors, we lay the groundwork for building a model of the intuitive theory of visual search.
+In two pre-registered experiments here we focus on feature search for colour and shape. Focusing on the first four trials in a visual search task, we ask whether prior experience with the task and stimuli is necessary for efficient search termination in feature searches. Unlike typical visual search experiments that comprise hundreds or thousands of trials, here we collect only a handful of trials from a large pool of online participants. This unusual design allows us to reliably identify search time patterns in the first trials of the experiment. Furthermore, by making sure that the first displays do not include the target stimulus, we are able for the first time to ask what knowledge is available to participants about their expected search efficiency prior to engaging with the task.
 
-\hypertarget{methods}{%
-\section{Methods}\label{methods}}
+We dub this approach \emph{zero-shot search termination} in a tribute to the study of \enquote{zero-shot learning} in machine learning: the ability to classify unseen categories of stimuli, based on generalizable knowledge from other categories (Xian, Schiele, \& Akata, 2017). Efficient (i.e., fast and accurate) quitting in target-absent trials prior to any target-present trials would indicate that knowledge about the salience of a divergent color or shape is available at some form in the cognitive system, and that this knowledge can flexibly be put to use for counterfactual reasoning in the process of inference about absence. Conversely, inefficient search in these first trials would mean that positive experience is necessary for this knowledge to be acquired, or to be expressed.
 
-We report how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study.
+\hypertarget{experiment-1}{%
+\section{Experiment 1}\label{experiment-1}}
+
+In Experiment 1, we examined search termination in the case of colour search. When searching for a deviant colour, the number of distractors has virtually no effect on search time (\emph{colour pop-out}; e.g., D'Zmura, 1991), for both \enquote{target present} and \enquote{target absent} responses. Here we asked whether efficient quitting in colour search is dependent on task experience. A detailed pre-registration document for Experiment 1 can be accessed via the following link: \url{https://osf.io/yh82v/}.
 
 \hypertarget{participants}{%
 \subsection{Participants}\label{participants}}
 
-The research complies with all relevant ethical regulations, and was approved by the Research Ethics Committee of University College London (study ID number 1260/003). Participants will be recruited via Prolific, and will give informed consent prior to their participation. They will be selected based on their acceptance rate (\textgreater95\%) and for being native English speakers. For each experiment, we will collect data until we reach 200 included participants for each of our hypotheses (after applying our pre-registered exclusion criteria). The entire experiment will take 3 minutes to complete (median completion time in our pilot data: 3:06 minutes). Participants will be paid £0.38 for their participation, equivalent to an hourly wage of £7.6.
+The research complied with all relevant ethical regulations, and was approved by the Research Ethics Committee of University College London (study ID number 1260/003). 1187 Participants were recruited via Prolific, and gave their informed consent prior to their participation. They were selected based on their acceptance rate (\textgreater95\%) and for being native English speakers. Following our pre-registration, we collected data until we reached 320 included participants for each of our pre-registered hypotheses (after applying our pre-registered exclusion criteria). The entire experiment took around 3 minutes to complete (median completion time: 3.19 minutes). Participants were paid £0.38 for their participation, equivalent to an hourly wage of £ 7.14.
 
-\hypertarget{experiment-1}{%
-\subsection{Experiment 1}\label{experiment-1}}
+\hypertarget{procedure}{%
+\subsection{Procedure}\label{procedure}}
 
-Participants will first be instructed about the visual search task. Specifically, that their task is to report, as accurately and quickly as possible, whether a target stimulus was present (press \enquote{J}) or absent (press \enquote{F}). Then, practice trials will be delivered, in which the target stimulus is a rotated \emph{T}, and distractors are rotated \emph{L}s. The purpose of the practice trials is to familiarize participants with the structure of the task. For these practice trials the number of items will always be 3. Practice trials will be delivered in small blocks of 6 trials each, and the main part of the experiment will start only once participants respond correctly on at least five trials in a block (see Figure \ref{fig:design}).
+A static version of Experiment 1 can be accessed on \url{matanmazor.github.io/termination/experiments/demos/exp1/}. Participants were first instructed about the visual search task. Specifically, that their task is to report, as accurately and quickly as possible, whether a target stimulus was present (press \enquote{J}) or absent (press \enquote{F}). Then, practice trials were delivered, in which the target stimulus was a rotated \emph{T}, and distractors are rotated \emph{L}s. The purpose of the practice trials was to familiarize participants with the structure of the task. For these practice trials the number of items was always 3. Practice trials were delivered in small blocks of 6 trials each, and the main part of the experiment started only once participants responded correctly on at least five trials in a block (see Figure \ref{fig:design}).
 
-\begin{figure}
-\includegraphics[width=1\linewidth]{figures/design} \caption{Design for experiments 1-3. Top panel: each visual search trial will start with a screen indicting the target stimulus. The search display will remain visible until a response is recorded. To motivate accurate responses, the feedback screen will remain visible for one second following correct responses and for four seconds following errors. Middle panel: after reading the instructions, participants will practice the visual search task in blocks of 6 trials, until they reach an accuracy level of 0.83. Bottom panel: the main part of the experiment will comprise 12 trials only, in which the target will be a red circle. Unbeknown the subjects, only trials 5-8 (Block 2) will be Target Present trials, and the remaining trials will be Target Absent trials. Each 4-trial block will follow a 2 by 2 design, with factors being set size (4 or 8) and distractor type (color or conjunction; blue circles only or blue circles and red squares, respectively). In experiment 2, Blocks 1 and 3 will comprise Target Present trials, and block 2 Target Absent trials. In block 2 of experiment 3, blue circles will be replaced with green circles.}\label{fig:design}
-\end{figure}
+\textbackslash begin\{figure\}
+\includegraphics[width=1\linewidth]{figures/designExp1} \textbackslash caption\{Experimental design. Top panel: each visual search trial started with a screen indicating the target stimulus. The search display remained visible until a response is recorded. To motivate accurate responses, the feedback screen remained visible for one second following correct responses and for four seconds following errors. Middle panel: after reading the instructions, participants practiced the visual search task in blocks of 6 trials, until they had reached an accuracy level of 83\% correct or higher (at most one error per block of 6 trials). Bottom panel: the main part of the experiment comprised 12 trials only, in which the target was a red dot. Unbeknown the subjects, only trials 5-8 (Block 2) were target-present trials, and the remaining trials were target-absent trials. Each 4-trial block followed a 2 by 2 design, with factors being set size (4 or 8) and distractor type (color or conjunction; blue dots only or blue dots and red squares, respectively).\}\label{fig:design}
+\textbackslash end\{figure\}
 
-In the main part of the experiment, participants will look for a red circle among blue circles or a mixed array of blue circles and red squares. Set sizes will be 4 or 12, resulting in a 2-by-2 design (search type: color or color\(\times\)shape, by set size: 4 or 12). Critically, and unknown to subjects, the first four trials will always be target-absent trials (one of each set-size \(\times\) search-type combination), presented in randomized order. These trials will be followed by the four corresponding target-present trials, presented in randomized order. The final four trials will again be target-absent trials, presented in randomized order.
+In the main part of the experiment, participants searched for a red dot among blue dots or a mixed array of blue dots and red squares. Set size was set to 4 or 8, resulting in a 2-by-2 design (search type: color or color\(\times\)shape, by set size: 4 or 8). Critically, and unbeknown to subjects, the first four trials were always target-absent trials (one of each set-size \(\times\) search-type combination), presented in randomized order. These trials were followed by the four corresponding target-present trials, presented in randomized order. The final four trials were again target-absent trials, presented in randomized order.
 
-\hypertarget{experiment-2-conditioned-on-experiment-1}{%
-\subsection{Experiment 2 (conditioned on Experiment 1)}\label{experiment-2-conditioned-on-experiment-1}}
+\hypertarget{randomization}{%
+\subsubsection{Randomization}\label{randomization}}
 
-Experiment 2 will be identical to Experiment 1, except for the order of blocks. This experiment will start with 4 Target Presence trials, that will be followed by 4 Target Absent trials, followed by 4 Target Present trials. The purpose of this order reversal manipulation is to test whether the pattern observed in blocks 1 and 2 of Experiment 1 is unique to Target Absence trials, or alternatively emerges in the first trials of the experiment, regardless of the presence or absence of a target.
-
-\hypertarget{experiment-3-conditioned-on-experiment-1}{%
-\subsection{Experiment 3 (conditioned on Experiment 1)}\label{experiment-3-conditioned-on-experiment-1}}
-
-Experiment 3 will be identical to Experiment 1, except for the four \enquote{Target Present} trials. Only in these four trials, blue circles will be replaced by green circles. The purpose of this manipulation is to test whether any learning between blocks 1 and 3 in Experiment 1 critically depends on direct experience with searching among distractors of a specific color, or alternatively, if learning about color search efficiency generalizes across colors.
+The order and timing of experimental events was determined pseudo-randomly by the Mersenne Twister pseudorandom number generator, initialized in a way that ensures registration time-locking (Mazor, Mazor, \& Mukamel, 2019).
 
 \hypertarget{data-analysis}{%
 \subsection{Data analysis}\label{data-analysis}}
@@ -195,48 +187,137 @@ Experiment 3 will be identical to Experiment 1, except for the four \enquote{Tar
 \hypertarget{rejection-criteria}{%
 \subsubsection{Rejection criteria}\label{rejection-criteria}}
 
-Participants will be excluded for making more than one error in the main part of the experiment, or for having extremely fast or slow reaction times in one or more of the tasks (below 250 milliseconds or above 5 seconds in more than 25\% of the trials).
+Participants were excluded for making more than one error in the main part of the experiment, or for having extremely fast or slow reaction times in one or more of the tasks (below 250 milliseconds or above 5 seconds in more than 25\% of the trials).
 
-Error trials, and trials with response time below 250 milliseconds or above 1 second will be excluded from the response-time analysis.
+Error trials, and trials with response times below 250 milliseconds or above 1 second were excluded from the response-time analysis.
 
 \hypertarget{data-preprocessing}{%
 \subsubsection{Data preprocessing}\label{data-preprocessing}}
 
-To control for within-block trial order effects, a separate linear regression model will be fit to the data of each block, predicting search time as a function of trial serial order (\(RT \sim \beta_0+\beta_1i\), with \(i\) denoting the mean-centered serial position within a block). Search times will be corrected by subtracting the product of the slope and the mean-centered serial position, in a block-wise manner.
+To control for within-block trial order effects, a separate linear regression model was fitted to the data of each block, predicting search time as a function of trial serial order (\(RT \sim \beta_0+\beta_1i\), with \(i\) denoting the mean-centered serial position within a block). Search times were corrected by subtracting the product of the slope and the mean-centered serial position, in a block-wise manner.
+
+Subject-wise search slopes were then extracted for each combination of search type (color or conjunction) and block number by fitting a linear regression model to the reaction time data with one intercept and one set-size term.
 
 \hypertarget{hypotheses-and-analysis-plan}{%
 \subsubsection{Hypotheses and analysis plan}\label{hypotheses-and-analysis-plan}}
 
-Subject-wise search slopes will be extracted for each combination of search type (color or conjunction) and block number (first or third) by fitting a linear regression model to the reaction time data with one intercept and one set-size term.
+Experiment 1 was designed to test several hypotheses about the contribution of metacognitive knowledge to search termination, the state of this knowledge prior to engaging with the task, and the effect of experience trials on this metacognitive knowledge. The specifics of our pre-registered analysis can be accessed in the following link: \url{https://osf.io/ea385}. We outline some possible search time patterns and their pre-registered interpretation in Fig. \ref{fig:models}.
 
-Analysis for Experiments 1 and 3 will follow the same procedure: a positive control based on Target Present trials, a test of the presence of a pop-out effect for color search in block 1, and a test for the change in slope for color search between blocks 1 and 3. All hypotheses will be tested using a repeated-measures t-test, with a significance level of 0.05. Experiment 2 will be analyzed in a similar manner with some changes, indicated below.
+\begin{figure}[H]
+\includegraphics[width=1\linewidth]{figures/models} \caption{Visualization of Hypotheses. Top left: typical search time results in visual search experiments with many trials (where TP =  Target Present responses; TA = Target Absent responses). Set size (x axis) affects search time in conjunction search, but much less so in color search. Different models make different predictions about target-absent serach times in the first block of the experiment. Top right: one possible pattern is that the same qualitative pattern will be observed in our design, with an overall decrease in response time as a function of trial number. This would suggest that the metacognitive knowledge necessary to support efficient inference about absence was already in place before engaging with the task. Bottom left: an alternative pattern is that the same qualitative pattern will be observed for blocks 2 and 3, but not in block 1. This would suggest that for inference about absence to be efficient, participants had to first experience some target-present trials. Bottom right: alternatively, some degree of metacognitive knowledge may be available prior to engaging with the task, with some being acquired by subsequent exposure to target-present trials. This would manifest as different slopes for conjunction and color searches in blocks 1 and a learning effect for color search between blocks 1 and 3.}\label{fig:models}
+\end{figure}
 
-Given the fact that we only have one trial per cell, one excluded trial is sufficient to make some hypotheses impossible to test on a given participant. For this reason, for each hypothesis separately, participants will be included only if all necessary trials meet our inclusion criteria. This means that some hypotheses may be tested on slightly different subsets of participants.
+Analysis comprised a positive control based on target-present trials, a test of the presence of a pop-out effect for target-absent color search in block 1, and a test for the change in slope for target-absent color search between blocks 1 and 3. All hypotheses were tested using a within-subject t-test, with a significance level of 0.05.
+Given the fact that we only have one trial per cell, one excluded trial is sufficient to make some hypotheses impossible to test on a given participant. For this reason, for each hypothesis separately, participants were included only if all necessary trials met our inclusion criteria. This meant that some hypotheses were tested on different subsets of participants.
 
-\emph{Hypothesis 1 (Positive control)}: To validate our methods and the quality of our data, we will test for a difference between search slopes for color and conjunction search in block 2 (Target Present). Based on previous work we expect a steeper slope for conjunction than for color search (Treisman \& Gelade, 1980; Wolfe, 1998). This positive control will serve to confirm that these effects are detectable in a large sample, even with only one trial per cell.
+We used R (Version 3.6.0; R Core Team, 2019) and the R-packages \emph{BayesFactor} (Version 0.9.12.4.2; Morey \& Rouder, 2018), \emph{cowplot} (Version 1.0.0; Wilke, 2019), \emph{dplyr} (Version 1.0.4; Wickham et al., 2020), \emph{ggplot2} (Version 3.3.1; Wickham, 2016), \emph{jsonlite} (Version 1.7.1; Ooms, 2014), \emph{lsr} (Version 0.5; Navarro, 2015), \emph{MESS} (Version 0.5.6; Ekstrøm, 2019), \emph{papaja} (Version 0.1.0.9942; Aust \& Barth, 2020, 2020, 2020), \emph{pwr} (Version 1.3.0; Champely, 2020), and \emph{tidyr} (Version 1.1.0; Wickham \& Henry, 2020) for all our analyses.
 
-\emph{Hypothesis 2}: Pop-out for color absence in block 1. Throughout our analysis, we will define pop-out as a search slope significantly lower than 10 ms/item. This cutoff was chosen based on empirical distributions of search slopes in feature search (Wolfe, 1998). We will test the null hypothesis that the search slope in the color search, block 1 (Target Absent) equals to or is higher than 10ms/item, using a t-test. We will further test the null hypothesis that search slopes for color and conjunction searches in blocks 1 are equal.
+\hypertarget{results}{%
+\subsection{Results}\label{results}}
 
-\emph{Hypothesis 3}: Pop-out for color absence in block 3. We will test the null hypothesis that the search slope in the color search, block 3 (target absent) equals to or is higher than 10ms/item, using a t-test. We will further test the null hypothesis that search slopes for color and conjunction searches in blocks 3 are equal.
+Overall mean accuracy was 0.95 (standard deviation =0.06). Median reaction time was 623.98 ms (median absolute deviation = 127.37). In all further analyses, only correct trials with response times between 250 and 1000 ms are included.
 
-\emph{Hypothesis 4}: Search slope for color search changes between blocks 1 and 3. We will test the null hypothesis that the search slope in the color search, block 1 (target absent) equals to search slope in the color search, block 1 (target absent).
+\emph{Hypothesis 1 (positive control)}: Search times in block 2 (target-present) followed the expected pattern, with a steep slope for conjunction search (\(M = 12.52\), 95\% CI \([10.08\), \(14.95]\)) and a shallow slope for conjunction search (\(M = 3.91\), 95\% CI \([2.13\), \(5.70]\); see middle panel in Fig. \ref{fig:exp1Plot}). The slope for color search was significantly lower than 10 ms/item and thus met our criterion for being considered \enquote{pop-out} (\(t(961) = -6.69\), \(p < .001\)). Furthermore, the difference between the slopes was significant (\(t(749) = 6.50\), \(p < .001\)). This positive control served to validate our method of using two trials per participant for obtaining reliable group-level estimates of search slopes.
 
-\emph{Hypothesis 5}: The change in search slopes between blocks 1 and 3 is different for color and for conjunction searches. To rule out a nonspecific change in search slope between blocks 1 and 3, We will compare the difference in search slopes for color search between block 1 and 3 with the difference in search slopes for conjunction search for the same blocks.
+\emph{Hypothesis 2}: Our central focus was on results from block 1 (target-absent). Here participants didn't yet have experience with searching for the red dot. Similar to the second block, the slope for the conjunction search was steep (\(M = 18.41\), 95\% CI \([14.95\), \(21.87]\)). A clear \enquote{pop-out} effect for color search was also evident (\(M = 0.15\), 95\% CI \([-\infty\), \(2.31]\), \(t(886) = -7.51\), \(p < .001\)). Furthermore, the average search slope for color search in this first block was significantly different from that of the conjunction search (\(t(413) = 6.55\), \(p < .001\); see leftmost panel in Fig. \ref{fig:exp1Plot}), indicating that a color-absence pop-out is already in place prior to direct task experience. This result is in line with the \emph{prior-knowledge only} model (see Fig. \ref{fig:models}), in which participants have valid expectations for efficient color search, prior to engaging with a task.
 
-Experiments 2 will be run only if we find no pop out effect for color search in block 1 (Hypotheses 2). Analysis for Experiment 2 will be similar to analysis for Experiments 1 and 3, with the following changes: Hypothesis 1 (positive control) will be performed on block 3, Hypothesis 2 (pop out for color absence) will be performed on block 2, and Hypotheses 4 and 5 will test for changes in the slope for Target Present, rather than Target Absent trials.
+Pre-registered hypotheses 3-5 were designed to test for a learning effect between blocks 1 and 3, before and after experience with observing a red target among blue distractors. Given the overwhelming pop-out effect for target-absent trials in block 1, not much room for additional learning remained. Indeed, results from these tests support a prior-knowledge only model.
 
-Experiments 3 will be run only if we find a significant, non-generic learning effect between blocks 1 and 3 (Hypotheses 4 and 5).
+\emph{Hypothesis 3}: Like in the first block, in the third block color search complied with our criterion for \enquote{pop-out} (\(M = 2.27\), 95\% CI \([-\infty\), \(3.86]\), \(t(979) = -7.98\), \(p < .001\)), and was significantly different from the conjunction search slope (\(t(745) = 11.16\), \(p < .001\); see rightmost panel in Fig. \ref{fig:exp1Plot}). This result is not surprising, given that a pop-out effect was already observed in block 1.
 
-Experiment 2 will test the specificity of the effect for Target-Absent trials, rather than Target Present trials more generally. Based on the idea that metacognitive knowledge is required for inference about absence much more than for inference about presence, we expect to find no learning effect between these blocks. Experiment 3 will test subjects' ability to generalize across different colors in learning from Target Present trials and in using this knowledge to guide their inference about absence in Target Absent trials.
+\emph{Hypothesis 4}: To quantify the learning effect for color search, we directly contrasted the search slope for color search in blocks 1 and 3. We find no evidence for a learning effect (\(t(799) = -1.15\), \(p = .250\)). Furthermore, a Bayesian t-test with a scaled Cauchy prior for effect sizes (r=0.707) provided strong evidence in favour of the absence of a learning effect (\(\mathrm{BF}_{\textrm{01}} = 12.98\)).
 
-\hypertarget{statistical-power}{%
-\subsection{Statistical power}\label{statistical-power}}
+\emph{Hypothesis 5}: In case of a learning effect for pop-out search, Hypothesis 5 was designed to test the specificity of this effect to color pop-out by computing an interaction between block number and search type. Given that no learning effect was observed, this test makes little sense. For completeness, we report that the change in slope between blocks 1 and 3 was similar for color and conjunction search (\(M = -3.58\), 95\% CI \([-10.52\), \(3.36]\), \(t(320) = -1.01\), \(p = .311\)).
 
-Statistical power calculations were performed using the R-pwr package (Champely, 2020).
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{termination_files/figure-latex/exp1Plot-1} \caption{Upper panel: median search time by distractor set size for the two search tasks across the three blocks. Correct responses only. Lower panel: accuracy as a function of block, set size and search type. Error bars represent the standard error of the median.}\label{fig:exp1Plot}
+\end{figure}
 
-With a minimum of 200 participants for each hypothesis, we will have statistical power of 95\% to detect effect size of 200, 0.256140388328483, 0.05, 0.95, two.sided, n is number of \emph{pairs}, Paired t test power calculation in a two tailed test.
+\hypertarget{additional-analyses}{%
+\subsection{Additional analyses}\label{additional-analyses}}
 
-\newpage
+In Experiment 1, we found a clear pop-out effect for color absence in the first trials of the experiment, before participants experienced color pop-out in target-present trials. As per our analysis, this reflects prior metacognitive knowledge about the expected efficiency of color search. In order to terminate the search immediately, participants must have known, implicitly or explicitly, that a red item would have popped out immediately. In the setting of this experiment, this knowledge could not be acquired in previous trials. However, an alternative account is that participants noticed the pop-out of the red distractors in the conjunction trials of block 1, and based their expectation for color pop out on those trials. This account can be directly tested by zeroing in on the subset of participants who performed the two color trials before the two conjunction trials in block 1 (the order of trials within each block was determined pseudorandomly, such that half of the participants had color-search for the first trial, and of those a third had color-search for the second trial as well). This subset of participants showed a clear pop-out effect (\(M = -5.07\), 95\% CI \([-\infty\), \(2.25]\), \(t(138) = -3.41\), \(p < .001\)), indicating that the highly efficient search termination in these first trials was not based on prior experience with red distractors.
+
+\hypertarget{experiment-2}{%
+\section{Experiment 2}\label{experiment-2}}
+
+Experiment 1 provided unequivocal evidence that color-absence pop-out occurs prior to experiencing color pop-out in the context of the same task. We interpret this as indicating that task-naive adults had valid implicit or explicit metacognitive expectations about color pop-out. This metacognitive knowledge may be innate (acquired in the course of evolution, for example driven by the utility of color search for foraging), learned from previous visual experience (for example, first-person experience of attention being immediately drawn to distinct colors), or culturally acquired (for example, through language). Experiment 2 was designed to extend these findings to another stimulus feature that is found to also efficiently guide attention: shape. The time cost of additional distractors in shape search was under 10 ms in our pilot data, rendering it another case of parallel, efficient search. It is possible however that unlike in the case of color, the metacognitive knowledge that gives rise to the pop-out effect for shape-absence is acquired through experience with the task. Unlike the colour space, that spans three dimensions only, the space of possible shapes is relatively unconstrained such that having prior knowledge of the expected effect of different shapes on attention requires a richer mental model of attentional processes. Furthrmore, colour is agreed to be a \enquote{guiding attribute of attention}, while it is unclear which shape features guide attention (Wolfe \& Horowitz, 2017). In this experiment we also include an additional control for prior experience with visual search tasks, and ask whether the implicit metacognitive knowledge about pop-out is available for explicit report.
+
+\hypertarget{participants-1}{%
+\subsection{Participants}\label{participants-1}}
+
+The research complied with all relevant ethical regulations, and was approved by the Research Ethics Committee of University College London (study ID number 1260/003). 887 Participants were recruited via Prolific, and gave their informed consent prior to their participation. They were selected based on their acceptance rate (\textgreater95\%) and for being native English speakers. We collected data until we reached 320 included participants for hypotheses 1-4 (after applying our pre-registered exclusion criteria). The entire experiment took around 4 minutes to complete (median completion time in our pilot data: 3.93 minutes). Participants were paid £0.51 for their participation, equivalent to an hourly wage of £7.78.
+
+\hypertarget{procedure-1}{%
+\subsection{Procedure}\label{procedure-1}}
+
+A static version of Experiment 2 can be accessed on \href{matanmazor.github.io/termination/experiments/demos/exp1/}{matanmazor.github.io/termination/experiments/demos/exp2/}. Experiment 2 was identical to Experiment 1 with the following exceptions. First, instead of color search trials, we included shape search trials, where the red dot target is present or absent in an array of red squares. Second, to minimize the similarity between conjunction and shape searches, conjunction trials included blue dots and red triangles as distractors. Third, to test participants' explicit metacognition about their visual search behaviour, upon completing the main part of the task participants were presented with the four target-absent displays (shape and conjunction displays with 4 or 8 items), and were asked to sort them from fastest to slowest. Finally, participants reported whether they had participated in a similar experiment before, where they were asked to search for shapes on the screen. Participants who responded \enquote{yes} were asked to tell us more about this previous experiment. This question was included in order to examine whether efficient target-absent search in trial 1 reflects prior experience with similar visual search experiments.
+
+Our pre-registered analysis plan for Experiment 2, including rejection criteria and data preprocessing, was identical to our analysis plan for Experiment 1, and can be accessed in the following link: \url{https://osf.io/v6mnb}.
+
+\hypertarget{results-1}{%
+\subsection{Results}\label{results-1}}
+
+Overall mean accuracy was 0.96 (standard deviation =0.06). Median reaction time was 644.60 ms (median absolute deviation = 123.89). In all further analyses, only correct trials with response times between 250 and 1000 ms are included.
+
+\emph{Hypothesis 1 (positive control)}: Search times in block 2 (target-present) followed the expected pattern, with a steep slope for conjunction search (\(M = 15.08\), 95\% CI \([12.34\), \(17.83]\)) and a shallow slope for shape search (\(M = 5.84\), 95\% CI \([3.90\), \(7.78]\); see middle panel of Fig. \ref{fig:exp2Plot}). The slope for shape search was significantly lower than 10 ms/item and thus met our criterion for being considered \enquote{pop-out} (\(t(754) = -4.21\), \(p < .001\)). Furthermore, the difference between the slopes was significant (\(t(584) = 4.98\), \(p < .001\)).
+
+\emph{Hypothesis 2}: Our central focus was on results from block 1 (target-absent). Here participants didn't yet have experience with finding the red dot. Similar to the second block, the slope for the conjunction search was steep (\(M = 19.53\), 95\% CI \([16.03\), \(23.04]\)). The slope for shape search was numerically lower than 10 ms/item, but not significantly so (\(M = 8.03\), 95\% CI \([-\infty\), \(10.50]\), \(t(608) = -1.31\), \(p = .095\)). Still, the average search slope for shape search in this first block was significantly different from that of the conjunction search (\(t(326) = 2.77\), \(p = .006\); see leftmost panel of Fig. \ref{fig:exp2Plot}), indicating that a processing advantage for the detecting the absence of a shape compared to the absence of shape-color conjunction was already in place before experience with target presence.
+
+\emph{Hypothesis 3}: As in the first block, in the third block the slope for shape search was numerically lower than 10 ms/item, but not significantly so (\(M = 8.85\), 95\% CI \([-\infty\), \(10.68]\), \(t(723) = -1.03\), \(p = .151\)). Importantly, the slope for shape search in block 3 was significantly different from the the slope for conjunction search (\(t(565) = 6.02\), \(p < .001\); see rightmost panel of Fig. \ref{fig:exp2Plot}).
+
+\emph{Hypothesis 4}: To quantify a potential learning effect for shape search between blocks 1 and 3, we directly contrasted the search slope for shape search in these two \enquote{target-absent} blocks. We find no evidence for a learning effect (\(t(542) = -0.03\), \(p = .974\)). Furthermore, a Bayesian t-test with a scaled Cauchy prior for effect sizes (r=0.707) provided strong evidence against a learning effect (\(\mathrm{BF}_{\textrm{01}} = 20.72\)). Like in Experiment 1, these results are most consistent with a \emph{prior-knowledge only} model (see Fig. \ref{fig:models}), in which participants already know to expect that shape search should be easier than conjunction search, prior to having direct experience with target-present trials.
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{termination_files/figure-latex/exp2Plot-1} \caption{Upper panel: median search time by distractor set size for the two search tasks across the three blocks. Correct responses only. Lower panel: accuracy as a function of block, set size and search type. Error bars represent the standard error of the median.}\label{fig:exp2Plot}
+\end{figure}
+
+\hypertarget{additional-analyses-1}{%
+\subsection{Additional Analyses}\label{additional-analyses-1}}
+
+\hypertarget{exploratory-analysis-task-experience}{%
+\subsection{Exploratory analysis: task experience}\label{exploratory-analysis-task-experience}}
+
+At the end of the experiment, participants were asked if they have ever participated in a similar experiment before, where they were asked to search for a target item. 796 participants answered \enquote{no} to this question. For those participants, a highly efficient search for a distinct shape in the first trials of the experiment, if found, cannot be due to prior experience performing a visual search task with similar stimuli. Participants that reported having no prior experience with a visual search task still showed efficient search termination for shape distractors (\(M = 7.32\), 95\% CI \([4.21\), \(10.43]\)), and were significantly more efficient in terminating shape search than conjunction search in the first 4 target-absent trials (\(t(296) = 2.68\), \(p = .008\)). Efficient search termination for shape search is therefore not dependent on prior visual search trials, neither within the same experiment nor in previous ones.
+
+\hypertarget{exploratory-analysis-search-time-estimates}{%
+\subsection{Exploratory analysis: search time estimates}\label{exploratory-analysis-search-time-estimates}}
+
+Upon completing the main part of Experiment 2, participants placed the four search arrays (shape and conjunction searches with 4 or 8 distractors) on a perceived difficulty axis. We used these ratings to ask whether the advantage for detecting the absence of a distinct shape over the absence of a shape/color conjunction depended on explicit access to metacognitive knowledge about search difficulty. The decision to quit early in target-absent shape search trials may depend on an internal belief that the target shape would have drawn attention immediately, but this belief may inaccessible to introspection. If introspective access is not a necessary condition for efficient quitting in visual search, some participants may not be able to reliably introspect about the difficulty of different searches but still be able to quit efficiently in shape search.
+
+For this analysis, we only considered the ratings of participants who engaged with the array-sorting trial, and moved some of the arrays before continuing to the next trial (N=789). Searches with 8 distractors were rated as more difficult than searches with 4 distractors, in line with the set-size effect (\(t(788) = 31.62\), \(p < .001\)). Furthermore, conjunction searches were rates as more difficult than shape searches (\(t(788) = 5.11\), \(p < .001\)). Finally, we fitted single-subject linear regression models to the two search types, predicting search-time estimates as a function of set size. Similar to actual search slopes, these slopes derived from subjective estimates were also shallower for shape than for conjunction search, reflecting a belief that the effect of set size in shape search is not as strong as the effect of set size in conjunction search (\(M = 6.45\), 95\% CI \([2.81\), \(10.08]\), \(t(788) = 3.48\), \(p = .001\)).
+
+Subjective search time estimates revealed that by the end of the experiment, the average participant considered the slope of shape search to be shallower than that of conjunction search. This suggests that at least some participants had introspective access to their visual search behaviour. But were those participants whose estimates reflected a shallow slope for shape search the same ones that were more efficient in detecting the absence of a shape in the display? The slopes of retrospective estimates for shape search were not reliably correlated with actual search slopes for shape absence in block 1 (\(r = .08\), 95\% CI \([-.06\), \(.22]\)) or 2 (\(r = .02\), 95\% CI \([-.12\), \(.16]\)). However, this result should be interpreted carefully in light of the low reliability of single subject estimated that are derived from one trial per cell. Indeed, search slopes for shape absence in blocks 1 and 3 were not reliably correlated themselves (\(r = .05\), 95\% CI \([-.10\), \(.19]\)).
+
+To answer this question using a more severe test ({\textbf{???}}), we focused on the subset of participants whose difficulty orderings reflected the erroneous belief that shape search was more difficult than conjunction search (\(N=\) 83). If efficient search termination depends on accurate explicit metacognitive knowledge about search efficiency, search termination in this subset of participants is not expected to be more efficient in shape compared to conjunction search, and is even expected to show the opposite pattern. In contrast with this prediction, and in support of a functional dissociation between explicit and implicit metacognitive knowledge, search slopes for shape-absence trials were shallower than for conjunction-absence trials (\(M_d = 12.45\), 95\% CI \([5.21\), \(19.69]\), \(t(82) = 3.42\), \(p = .001\)).
+
+\hypertarget{discussion}{%
+\section{Discussion}\label{discussion}}
+
+Deciding that an item is absent requires counterfactual thinking, in the form of \enquote{I would have seen it if it was present}. In some cases, it is immediately clear that an hypothetical target would have been detected (such as when searching for a red item, but seeing only blue items), and in other cases more deliberate searching is needed until this belief can be held with confidence (such as when searching for a conjunction of features, for example colour and shape). Here we sought to determine the origins of this metacognitive knowledge that allows participants to conclude that a target would be found immediately in the first case, but not in the second. Specifically, we asked if this knowledge depends on task experience (such that with time, participants learn that some searches are easier than others), or alternatively, whether it is available already in the first trials of the experiment.
+
+Previous studies of search termination have focused on the calibration of a quitting strategy over long chains of similar trials. For example, in a seminal study by Chun and Wolfe (1996), participants decreased their activation threshold (the necessary activation for an item to be scanned) following misses, but increased the threshold following correct rejections. This calibration mechanism critically depended on two features of the experimental design: a large number of similar trials, and explicit feedback about accuracy. Similarly, in a multi-session perceptual training study by Ellison and Walsh (1998), response times became faster over sessions, and search slopes for conjunction search became shallower. In more recent studies, participants were able to learn statistical regularities in spatial position (Moorselaar \& Slagter, 2019) and visual features (Moorselaar, Lampers, Cordesius, \& Slagter, 2020) of distractor stimuli in a visual search task, and to use this information for making faster responses. These studies revealed important mechanisms by which task experience can affect visual search behaviour, but they left open the question of what guides search termination in the absence of any task experience. Our zero-shot search termination paradigm revealed that some knowledge about search efficiency is available to participants already in the first trials of the experiment, before engaging with the task or knowing what distractors to expect.
+
+In two experiments, no prior experience with color or shape pop-out in previous trials was needed for participants to be able to terminate the search early when a target was absent. Participants were sensitive to the counterfactual likelihood of detecting a hypothetical target even in the first trials of the experiment, suggesting that metacognitive knowledge about visual attention (e.g., \enquote{red pops out}, or \enquote{a dot would catch my attention}) is available to guide zero-shot search termination. In Experiment 2, we find that some of this knowledge is represented explicitly, as expressed in participants' ordering of visual search arrays by difficulty. However, focusing on participants with erroneous metacognitive beliefs about search efficiency, we find that explicit metacognitive knowledge is not a necessary condition for efficient search termination. More broadly, this finding indicates a functional dissociation between explicit and implicit metacognitive knowledge.
+
+\hypertarget{is-implicit-metacognitive-knowledge-metacognitive}{%
+\subsection{Is implicit metacognitive knowledge metacognitive?}\label{is-implicit-metacognitive-knowledge-metacognitive}}
+
+In this study we assumed that efficient search termination is impossible without accurate metacognitive knowledge about search difficulty. We base this conjecture on our conceptual analysis of inference about absence: in order to represent something as absent, one must know that they would have detected it had it been present (Mazor \& Fleming, 2020). Alternative approaches to visual search assume that the absence of a stimulus can sometimes be perceived directly, without alluding to any metacognitive beliefs or counterfactual thinking. For example, ensemble perception allows observers to extract summary statistical information from sets of similar stimuli, without directly perceiving every single stimulus (Whitney \& Yamanashi Leib, 2018). According to one alternative explanation of our results, if participants immediately perceive that the search array is all blue, they might not need to rely on any counterfactual thinking or self-knowledge to conclude that no red item was present. Similarly, when searching for a red dot, there is no need to serially scan a search array if it is immediately perceived as comprising only squares.
+
+When contrasting this alternative account with our counterfactual model, it is useful to ask how does the visual system extract ensemble properties from sets of objects. For the global statistical property \enquote{the array comprises only squares} to be extracted from a display without representing individual squares, the visual system must represent, explicitly or implicitly, that a non-square item would have been detected if present. This representation can be implemented, for example, as a threshold on curvature-sensitive neurons (\enquote{a round object would have induced a higher firing rate in this neuron population}), or more generally as a likelihood function going from polygons to firing patterns (\enquote{The perceived input is most likely under a world state where the display includes polygons only}). Even within the ensemble perception framework, inference about the absence of items must be based on some form of meta-level knowledge about the cognitive and perceptual systems. The fact that attention may not be required for ensemble perception (Hochstein, Pavlovskaya, Bonneh, \& Soroker, 2015) can inform and constrain our theories of where this meta-level knowledge is represented in the cognitive hierarchy, but it does not, by itself, weigh on the question of whether this is indeed metacognitive knowledge.
+
+We note here that it not a prerequisite that metacognitive knowledge be accessible to consciousness. Metacognitive knowledge was originally assumed by Flavell (1979) to mostly affect cognition without accessing consciousness at all (i.e.~without inducing a \enquote{metacognitive experience}). Different aspects of metacognition monitoring, including an immediate \emph{Feeling of Knowing} when presented with a problem, have been attributed to implicit metacognitive mechanisms that share a conceptual similarity with the ones described in the previous paragraph (Reder \& Schunn, 1996). More relevant to visual search, a schematic model of attention has been suggested to be implemented in the brains of many animal species, including all mammals and birds, and to facilitate attention control and monitoring (Graziano, 2013). This \emph{Attention Schema} is metacognitive in the sense that it reflects self knowledge about one's own attention. This kind of implicit metacognitive knowledge may be crucial for extracting ensemble statistics from displays, and for representing the absence of objects.
+
+\hypertarget{inference-about-absence-as-a-tool-for-studying-implicit-self-knowledge}{%
+\subsection{Inference about absence as a tool for studying implicit self knowledge}\label{inference-about-absence-as-a-tool-for-studying-implicit-self-knowledge}}
+
+Participants' early quitting in target-absence feature searches taught us something about implicit self-knowledge. This is not a coincidence, but an example of a general principle: inference about absence critically relies on self-knowledge not only in visual search (\enquote{If a target was present, I would have found it}) but also in near-threshold detection (\enquote{If a stimulus was present, I would have noticed it}), recognition memory (\enquote{If this item was in the study list, I would have remembered it}), and problem-solving (\enquote{If a solution to this problem was present, I would have come up with it}). This makes inference about absence an important tool for studying implicit self-knowledge in a range of domains without relying on explicit metacognitive reports. For example, in the context of recognition memory, items that are most likely to be remembered are also the ones that are most likely to be correctly rejected as foils when new. This \enquote{mirror effect} (Brown, Lewis, \& Monk, 1977) conceptually resembles the alignment of feature-present and feature-absent search times across items and visual dimensions in visual search: if a target is found easily within a set of distractors \emph{S}, it would also be easy to conclude that a target is absent if \emph{S} is presented without the target in it. Just as in the study of visual search, previous studies of the mirror effect adopted a typical many subjects/few trials designs (e.g., Brown et al., 1977; Glanzer \& Adams, 1985; Greene \& Thapar, 1994). By generalizing the approach we have taken here to implicit metacognitive knowledge of memory, future \emph{Zero-shot negative recognition} experiments could ask whether the self knowledge that gives rise to the mirror effect is also available prior to engaging with the task.
+
+\hypertarget{conclusion}{%
+\subsection{Conclusion}\label{conclusion}}
+
+Search termination in the first few trials of an experiment (zero shot search termination) showed the same qualitative response time pattern as that commonly found in typical (few subjects/many trials) visual search experiments. Given that no target was present in these trials, participants must have been sensitive to the counterfactual likelihood of them finding the target, had it been present. In Experiment 2 we showed that this metacognitive knowledge about search difficulty was often accessible to report, but that this was not a necessary condition for efficient search termination. We interpret our results as indicating a dissociation between implicit and explicit metacognitive knowledge, with the former having a particularly influential role in inference about absence.
 
 \hypertarget{references}{%
 \section{References}\label{references}}
@@ -249,14 +330,8 @@ With a minimum of 200 participants for each hypothesis, we will have statistical
 \leavevmode\hypertarget{ref-R-papaja}{}%
 Aust, F., \& Barth, M. (2020). \emph{papaja: Create APA manuscripts with R Markdown}. Retrieved from \url{https://github.com/crsh/papaja}
 
-\leavevmode\hypertarget{ref-R-Matrix}{}%
-Bates, D., \& Maechler, M. (2019). \emph{Matrix: Sparse and dense matrix classes and methods}. Retrieved from \url{https://CRAN.R-project.org/package=Matrix}
-
-\leavevmode\hypertarget{ref-R-brms_a}{}%
-Bürkner, P.-C. (2017). brms: An R package for Bayesian multilevel models using Stan. \emph{Journal of Statistical Software}, \emph{80}(1), 1--28. \url{https://doi.org/10.18637/jss.v080.i01}
-
-\leavevmode\hypertarget{ref-R-brms_b}{}%
-Bürkner, P.-C. (2018). Advanced Bayesian multilevel modeling with the R package brms. \emph{The R Journal}, \emph{10}(1), 395--411. \url{https://doi.org/10.32614/RJ-2018-017}
+\leavevmode\hypertarget{ref-brown1977memorability}{}%
+Brown, J., Lewis, V., \& Monk, A. (1977). Memorability, word frequency and negative recognition. \emph{The Quarterly Journal of Experimental Psychology}, \emph{29}(3), 461--473.
 
 \leavevmode\hypertarget{ref-R-pwr}{}%
 Champely, S. (2020). \emph{Pwr: Basic functions for power analysis}. Retrieved from \url{https://CRAN.R-project.org/package=pwr}
@@ -264,50 +339,71 @@ Champely, S. (2020). \emph{Pwr: Basic functions for power analysis}. Retrieved f
 \leavevmode\hypertarget{ref-chun1996just}{}%
 Chun, M. M., \& Wolfe, J. M. (1996). Just say no: How are visual searches terminated when there is no target present? \emph{Cognitive Psychology}, \emph{30}(1), 39--78.
 
-\leavevmode\hypertarget{ref-R-Rcpp_b}{}%
-Eddelbuettel, D., \& Balamuta, J. J. (2017). Extending extitR with extitC++: A Brief Introduction to extitRcpp. \emph{PeerJ Preprints}, \emph{5}, e3188v1. \url{https://doi.org/10.7287/peerj.preprints.3188v1}
-
-\leavevmode\hypertarget{ref-R-Rcpp_a}{}%
-Eddelbuettel, D., \& François, R. (2011). Rcpp: Seamless R and C++ integration. \emph{Journal of Statistical Software}, \emph{40}(8), 1--18. \url{https://doi.org/10.18637/jss.v040.i08}
+\leavevmode\hypertarget{ref-d1991color}{}%
+D'Zmura, M. (1991). Color in visual search. \emph{Vision Research}, \emph{31}(6), 951--966.
 
 \leavevmode\hypertarget{ref-R-MESS}{}%
 Ekstrøm, C. T. (2019). \emph{MESS: Miscellaneous esoteric statistical scripts}. Retrieved from \url{https://CRAN.R-project.org/package=MESS}
 
-\leavevmode\hypertarget{ref-R-purrr}{}%
-Henry, L., \& Wickham, H. (2020). \emph{Purrr: Functional programming tools}. Retrieved from \url{https://CRAN.R-project.org/package=purrr}
+\leavevmode\hypertarget{ref-ellison1998perceptual}{}%
+Ellison, A., \& Walsh, V. (1998). Perceptual learning in visual search: Some evidence of specificities. \emph{Vision Research}, \emph{38}(3), 333--345.
+
+\leavevmode\hypertarget{ref-flavell1979metacognition}{}%
+Flavell, J. H. (1979). Metacognition and cognitive monitoring: A new area of cognitive--developmental inquiry. \emph{American Psychologist}, \emph{34}(10), 906.
+
+\leavevmode\hypertarget{ref-glanzer1985mirror}{}%
+Glanzer, M., \& Adams, J. K. (1985). The mirror effect in recognition memory. \emph{Memory \& Cognition}, \emph{13}(1), 8--20.
+
+\leavevmode\hypertarget{ref-graziano2013consciousness}{}%
+Graziano, M. S. (2013). \emph{Consciousness and the social brain}. Oxford University Press.
+
+\leavevmode\hypertarget{ref-greene1994mirror}{}%
+Greene, R. L., \& Thapar, A. (1994). Mirror effect in frequency discrimination. \emph{Journal of Experimental Psychology: Learning, Memory, and Cognition}, \emph{20}(4), 946.
+
+\leavevmode\hypertarget{ref-hochstein2015global}{}%
+Hochstein, S., Pavlovskaya, M., Bonneh, Y. S., \& Soroker, N. (2015). Global statistics are not neglected. \emph{Journal of Vision}, \emph{15}(4), 7--7.
+
+\leavevmode\hypertarget{ref-hulleman2017impending}{}%
+Hulleman, J., \& Olivers, C. N. (2017). The impending demise of the item in visual search. \emph{Behavioral and Brain Sciences}, \emph{40}.
+
+\leavevmode\hypertarget{ref-mazor2020distinguishing}{}%
+Mazor, M., \& Fleming, S. M. (2020). Distinguishing absence of awareness from awareness of absence. \emph{Philosophy and the Mind Sciences}, \emph{1}(II).
+
+\leavevmode\hypertarget{ref-mazor2019novel}{}%
+Mazor, M., Mazor, N., \& Mukamel, R. (2019). A novel tool for time-locking study plans to results. \emph{European Journal of Neuroscience}, \emph{49}(9), 1149--1156.
+
+\leavevmode\hypertarget{ref-van2020neural}{}%
+Moorselaar, D. van, Lampers, E., Cordesius, E., \& Slagter, H. A. (2020). Neural mechanisms underlying expectation-dependent inhibition of distracting information. \emph{Elife}, \emph{9}, e61048.
+
+\leavevmode\hypertarget{ref-van2019learning}{}%
+Moorselaar, D. van, \& Slagter, H. A. (2019). Learning what is irrelevant or relevant: Expectations facilitate distractor inhibition and target facilitation through distinct neural mechanisms. \emph{Journal of Neuroscience}, \emph{39}(35), 6953--6967.
+
+\leavevmode\hypertarget{ref-moran2013competitive}{}%
+Moran, R., Zehetleitner, M., Müller, H. J., \& Usher, M. (2013). Competitive guided search: Meeting the challenge of benchmark rt distributions. \emph{Journal of Vision}, \emph{13}(8), 24--24.
 
 \leavevmode\hypertarget{ref-R-BayesFactor}{}%
 Morey, R. D., \& Rouder, J. N. (2018). \emph{BayesFactor: Computation of bayes factors for common designs}. Retrieved from \url{https://CRAN.R-project.org/package=BayesFactor}
 
-\leavevmode\hypertarget{ref-R-tibble}{}%
-Müller, K., \& Wickham, H. (2020). \emph{Tibble: Simple data frames}. Retrieved from \url{https://CRAN.R-project.org/package=tibble}
-
 \leavevmode\hypertarget{ref-R-lsr}{}%
 Navarro, D. (2015). \emph{Learning statistics with r: A tutorial for psychology students and other beginners. (Version 0.5)}. Adelaide, Australia: University of Adelaide. Retrieved from \url{http://ua.edu.au/ccs/teaching/lsr}
 
-\leavevmode\hypertarget{ref-R-coda}{}%
-Plummer, M., Best, N., Cowles, K., \& Vines, K. (2006). CODA: Convergence diagnosis and output analysis for mcmc. \emph{R News}, \emph{6}(1), 7--11. Retrieved from \url{https://journal.r-project.org/archive/}
+\leavevmode\hypertarget{ref-R-jsonlite}{}%
+Ooms, J. (2014). The jsonlite package: A practical and consistent mapping between json data and r objects. \emph{arXiv:1403.2805 {[}stat.CO{]}}. Retrieved from \url{https://arxiv.org/abs/1403.2805}
 
 \leavevmode\hypertarget{ref-R-base}{}%
 R Core Team. (2019). \emph{R: A language and environment for statistical computing}. Vienna, Austria: R Foundation for Statistical Computing. Retrieved from \url{https://www.R-project.org/}
 
-\leavevmode\hypertarget{ref-R-broom}{}%
-Robinson, D., \& Hayes, A. (2020). \emph{Broom: Convert statistical analysis objects into tidy tibbles}. Retrieved from \url{https://CRAN.R-project.org/package=broom}
+\leavevmode\hypertarget{ref-reder1996metacognition}{}%
+Reder, L. M., \& Schunn, C. D. (1996). Metacognition does not imply awareness: Strategy choice is governed by implicit learning and memory.
 
 \leavevmode\hypertarget{ref-treisman1980feature}{}%
 Treisman, A. M., \& Gelade, G. (1980). A feature-integration theory of attention. \emph{Cognitive Psychology}, \emph{12}(1), 97--136.
 
+\leavevmode\hypertarget{ref-whitney2018ensemble}{}%
+Whitney, D., \& Yamanashi Leib, A. (2018). Ensemble perception. \emph{Annual Review of Psychology}, \emph{69}, 105--129.
+
 \leavevmode\hypertarget{ref-R-ggplot2}{}%
 Wickham, H. (2016). \emph{Ggplot2: Elegant graphics for data analysis}. Springer-Verlag New York. Retrieved from \url{https://ggplot2.tidyverse.org}
-
-\leavevmode\hypertarget{ref-R-stringr}{}%
-Wickham, H. (2019). \emph{Stringr: Simple, consistent wrappers for common string operations}. Retrieved from \url{https://CRAN.R-project.org/package=stringr}
-
-\leavevmode\hypertarget{ref-R-forcats}{}%
-Wickham, H. (2020). \emph{Forcats: Tools for working with categorical variables (factors)}. Retrieved from \url{https://CRAN.R-project.org/package=forcats}
-
-\leavevmode\hypertarget{ref-R-tidyverse}{}%
-Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L. D., François, R., \ldots{} Yutani, H. (2019). Welcome to the tidyverse. \emph{Journal of Open Source Software}, \emph{4}(43), 1686. \url{https://doi.org/10.21105/joss.01686}
 
 \leavevmode\hypertarget{ref-R-dplyr}{}%
 Wickham, H., François, R., Henry, L., \& Müller, K. (2020). \emph{Dplyr: A grammar of data manipulation}. Retrieved from \url{https://CRAN.R-project.org/package=dplyr}
@@ -315,152 +411,23 @@ Wickham, H., François, R., Henry, L., \& Müller, K. (2020). \emph{Dplyr: A gra
 \leavevmode\hypertarget{ref-R-tidyr}{}%
 Wickham, H., \& Henry, L. (2020). \emph{Tidyr: Tidy messy data}. Retrieved from \url{https://CRAN.R-project.org/package=tidyr}
 
-\leavevmode\hypertarget{ref-R-readr}{}%
-Wickham, H., Hester, J., \& Francois, R. (2018). \emph{Readr: Read rectangular text data}. Retrieved from \url{https://CRAN.R-project.org/package=readr}
-
 \leavevmode\hypertarget{ref-R-cowplot}{}%
 Wilke, C. O. (2019). \emph{Cowplot: Streamlined plot theme and plot annotations for 'ggplot2'}. Retrieved from \url{https://CRAN.R-project.org/package=cowplot}
 
-\leavevmode\hypertarget{ref-wolfe1998can}{}%
-Wolfe, J. M. (1998). What can 1 million trials tell us about visual search? \emph{Psychological Science}, \emph{9}(1), 33--39.
+\leavevmode\hypertarget{ref-wolfe2021guided}{}%
+Wolfe, J. (2021). Guided search 6.0: An updated model of visual search. \emph{Psychonomic Bulletin \& Review}.
 
-\endgroup
+\leavevmode\hypertarget{ref-wolfe1994guided}{}%
+Wolfe, J. M. (1994). Guided search 2.0 a revised model of visual search. \emph{Psychonomic Bulletin \& Review}, \emph{1}(2), 202--238.
 
-\newpage
+\leavevmode\hypertarget{ref-wolfe2007guided}{}%
+Wolfe, J. M., \& Gray, W. (2007). Guided search 4.0. \emph{Integrated Models of Cognitive Systems}, 99--119.
 
-\hypertarget{supplementary-information}{%
-\section{Supplementary information}\label{supplementary-information}}
+\leavevmode\hypertarget{ref-wolfe2017five}{}%
+Wolfe, J. M., \& Horowitz, T. S. (2017). Five factors that guide attention in visual search. \emph{Nature Human Behaviour}, \emph{1}(3), 1--8.
 
-\hypertarget{pilot-data-and-analysis}{%
-\section{Pilot data and analysis}\label{pilot-data-and-analysis}}
-
-\hypertarget{pilot-experiment}{%
-\subsection{Pilot Experiment}\label{pilot-experiment}}
-
-We used R (Version 3.6.0; R Core Team, 2019) and the R-packages \emph{\}base} {[}@\}R-base{]}, \emph{\}reticulate} {[}@\}R-reticulate{]}, \emph{base} (Version 3.6.0; @\}R-base; R Core Team, 2019), \emph{BayesFactor} (Version 0.9.12.4.2; Morey \& Rouder, 2018), \emph{brms} (Version 2.13.0; Bürkner, 2017, 2018), \emph{broom} (Version 0.5.6; Robinson \& Hayes, 2020), \emph{coda} (Version 0.19.3; Plummer, Best, Cowles, \& Vines, 2006), \emph{cowplot} (Version 1.0.0; Wilke, 2019), \emph{dplyr} (Version 1.0.0; Wickham et al., 2020), \emph{forcats} (Version 0.5.0; Wickham, 2020), \emph{ggplot2} (Version 3.3.1; Wickham, 2016), \emph{lsr} (Version 0.5; Navarro, 2015), \emph{Matrix} (Version 1.2.17; Bates \& Maechler, 2019), \emph{MESS} (Version 0.5.6; Ekstrøm, 2019), \emph{papaja} (Version 0.1.0.9942; Aust \& Barth, 2020, 2020, 2020), \emph{purrr} (Version 0.3.4; Henry \& Wickham, 2020), \emph{pwr} (Version 1.3.0; Champely, 2020), \emph{Rcpp} (Version 1.0.4.6; Eddelbuettel \& François, 2011; Eddelbuettel \& Balamuta, 2017), \emph{readr} (Version 1.3.1; Wickham, Hester, \& Francois, 2018), \emph{stringr} (Version 1.4.0; Wickham, 2019), \emph{tibble} (Version 3.0.1; Müller \& Wickham, 2020), \emph{tidyr} (Version 1.1.0; Wickham \& Henry, 2020), and \emph{tidyverse} (Version 1.3.0; Wickham, Averick, et al., 2019) for all our analyses.
-
-\hypertarget{participants-1}{%
-\subsection{Participants}\label{participants-1}}
-
-We collected data from a total of 181 participants, recruited on Prolific. The entire experiment took 3 minutes to complete (median completion time: 3:06 minutes). Participants were paid £0.38 for their participation, equivalent to an hourly wage of £7.6. The data of 163 participants met our inclusion criteria and were used for the main analysis.
-
-\hypertarget{material}{%
-\subsection{Material}\label{material}}
-
-\hypertarget{procedure}{%
-\subsection{Procedure}\label{procedure}}
-
-The pilot task, as delivered to participants, can be accessed \href{http://167.99.93.4/publix/30/start?batchId=51\&generalMultiple}{in the following link}.
-The pilot task followed the procedure for Experiment 1, described in the Methods section above.
-
-\hypertarget{results}{%
-\subsection{Results}\label{results}}
-
-Overall mean accuracy was 0.95 (standard deviation =0.06). The median reaction time was 626.56 ms (median obsolute deviation = 129.59). In all further analysis, only correct trials with response time between 250 and 1000 ms were included.
-
-\emph{Hypothesis 1 (positive control)}: Search times in block 2 (target-present) followed the expected pattern, with a steep slope for conjunction search (\(M = 14.97\), 95\% CI \([8.61\), \(21.34]\)) and a shallow slope for conjunction search (\(M = 5.26\), 95\% CI \([1.19\), \(9.33]\)). The slope for color search was significantly lower than 5 ms/item and thus met our criterion for being considered \enquote{pop-out} (\(t(138) = -2.30\), \(p = .011\)). Furthermore, the difference between the slopes was significant (\(t(105) = 2.90\), \(p = .005\)). This positive control served to validate our method.
-
-\emph{Hypothesis 2}: Our central focus was on results from block 1 (target-absent). Here participants didn't yet have experience with searching for the red circle. Similar to the second block, the slope for the conjunction search was steep (\(M = 15.39\), 95\% CI \([5.99\), \(24.79]\)). However, in this first block the slope of the color search did not meet our criterion for being considered \enquote{pop-out} (\(M = 9.56\), 95\% CI \([-\infty\), \(16.12]\), \(t(116) = -0.11\), \(p = .456\)). Furthermore, search slope for color search in this first block was indistinguishable from that of the conjunction search (\(t(61) = 0.64\), \(p = .526\)), suggesting that some experience was needed in order for the color pop-out effect to manifest in target-absence searches.
-
-\emph{Hypothesis 3}: Next, we tested the effect of experience on search slope. In the third block participants made \enquote{Target Absent} judgments, but in contrast to the first block here they already had experience with \enquote{Target Present} trials. In this third block, color search complied with our criterion for \enquote{pop-out} (\(M = -2.95\), 95\% CI \([-\infty\), \(1.51]\), \(t(136) = -4.81\), \(p < .001\)), and was significantly different from the search for conjunction search (\(t(106) = 7.28\), \(p < .001\)). In this third blocks, participants already showed a full pop-out effect for color search.
-
-\emph{Hypothesis 4}: To quantify the learning effect for color search, we directly contrasted the search slope for color search in blocks 1 and 3. by contrasting the color slopes for the target-absence blocks 1 and 3. By the third block (or 9th trial), the slope for color search was already significantly different from the slope in block 1 (\(t(101) = 2.48\), \(p = .015\)), indicating a learning effect.
-
-\emph{Hypothesis 5}: Finally, to make sure that this learning effect is not generic (for example, participants generally become more efficient in their searches), we quantified the interaction effect of search type (color, conjunction), and block number (1 and 3). This effect was only marginally significant in our sample (\(M = 18.48\), 95\% CI \([-1.76\), \(38.72]\), \(t(49) = 1.83\), \(p = .073\)).
-
-\begin{figure}
-\centering
-\includegraphics{termination_files/figure-latex/RT-pilot-1.pdf}
-\caption{\label{fig:RT-pilot}Median search time by distractor set size for the two search tasks across the three blocks. Correct responses only. Error bars represent the standard error of the median.}
-\end{figure}
-
-\newpage
-
-\hypertarget{references-1}{%
-\section{References}\label{references-1}}
-
-\begingroup
-\setlength{\parindent}{-0.5in}
-\setlength{\leftskip}{0.5in}
-
-\hypertarget{refs}{}
-\leavevmode\hypertarget{ref-R-papaja}{}%
-Aust, F., \& Barth, M. (2020). \emph{papaja: Create APA manuscripts with R Markdown}. Retrieved from \url{https://github.com/crsh/papaja}
-
-\leavevmode\hypertarget{ref-R-Matrix}{}%
-Bates, D., \& Maechler, M. (2019). \emph{Matrix: Sparse and dense matrix classes and methods}. Retrieved from \url{https://CRAN.R-project.org/package=Matrix}
-
-\leavevmode\hypertarget{ref-R-brms_a}{}%
-Bürkner, P.-C. (2017). brms: An R package for Bayesian multilevel models using Stan. \emph{Journal of Statistical Software}, \emph{80}(1), 1--28. \url{https://doi.org/10.18637/jss.v080.i01}
-
-\leavevmode\hypertarget{ref-R-brms_b}{}%
-Bürkner, P.-C. (2018). Advanced Bayesian multilevel modeling with the R package brms. \emph{The R Journal}, \emph{10}(1), 395--411. \url{https://doi.org/10.32614/RJ-2018-017}
-
-\leavevmode\hypertarget{ref-R-pwr}{}%
-Champely, S. (2020). \emph{Pwr: Basic functions for power analysis}. Retrieved from \url{https://CRAN.R-project.org/package=pwr}
-
-\leavevmode\hypertarget{ref-chun1996just}{}%
-Chun, M. M., \& Wolfe, J. M. (1996). Just say no: How are visual searches terminated when there is no target present? \emph{Cognitive Psychology}, \emph{30}(1), 39--78.
-
-\leavevmode\hypertarget{ref-R-Rcpp_b}{}%
-Eddelbuettel, D., \& Balamuta, J. J. (2017). Extending extitR with extitC++: A Brief Introduction to extitRcpp. \emph{PeerJ Preprints}, \emph{5}, e3188v1. \url{https://doi.org/10.7287/peerj.preprints.3188v1}
-
-\leavevmode\hypertarget{ref-R-Rcpp_a}{}%
-Eddelbuettel, D., \& François, R. (2011). Rcpp: Seamless R and C++ integration. \emph{Journal of Statistical Software}, \emph{40}(8), 1--18. \url{https://doi.org/10.18637/jss.v040.i08}
-
-\leavevmode\hypertarget{ref-R-MESS}{}%
-Ekstrøm, C. T. (2019). \emph{MESS: Miscellaneous esoteric statistical scripts}. Retrieved from \url{https://CRAN.R-project.org/package=MESS}
-
-\leavevmode\hypertarget{ref-R-purrr}{}%
-Henry, L., \& Wickham, H. (2020). \emph{Purrr: Functional programming tools}. Retrieved from \url{https://CRAN.R-project.org/package=purrr}
-
-\leavevmode\hypertarget{ref-R-BayesFactor}{}%
-Morey, R. D., \& Rouder, J. N. (2018). \emph{BayesFactor: Computation of bayes factors for common designs}. Retrieved from \url{https://CRAN.R-project.org/package=BayesFactor}
-
-\leavevmode\hypertarget{ref-R-tibble}{}%
-Müller, K., \& Wickham, H. (2020). \emph{Tibble: Simple data frames}. Retrieved from \url{https://CRAN.R-project.org/package=tibble}
-
-\leavevmode\hypertarget{ref-R-lsr}{}%
-Navarro, D. (2015). \emph{Learning statistics with r: A tutorial for psychology students and other beginners. (Version 0.5)}. Adelaide, Australia: University of Adelaide. Retrieved from \url{http://ua.edu.au/ccs/teaching/lsr}
-
-\leavevmode\hypertarget{ref-R-coda}{}%
-Plummer, M., Best, N., Cowles, K., \& Vines, K. (2006). CODA: Convergence diagnosis and output analysis for mcmc. \emph{R News}, \emph{6}(1), 7--11. Retrieved from \url{https://journal.r-project.org/archive/}
-
-\leavevmode\hypertarget{ref-R-base}{}%
-R Core Team. (2019). \emph{R: A language and environment for statistical computing}. Vienna, Austria: R Foundation for Statistical Computing. Retrieved from \url{https://www.R-project.org/}
-
-\leavevmode\hypertarget{ref-R-broom}{}%
-Robinson, D., \& Hayes, A. (2020). \emph{Broom: Convert statistical analysis objects into tidy tibbles}. Retrieved from \url{https://CRAN.R-project.org/package=broom}
-
-\leavevmode\hypertarget{ref-treisman1980feature}{}%
-Treisman, A. M., \& Gelade, G. (1980). A feature-integration theory of attention. \emph{Cognitive Psychology}, \emph{12}(1), 97--136.
-
-\leavevmode\hypertarget{ref-R-ggplot2}{}%
-Wickham, H. (2016). \emph{Ggplot2: Elegant graphics for data analysis}. Springer-Verlag New York. Retrieved from \url{https://ggplot2.tidyverse.org}
-
-\leavevmode\hypertarget{ref-R-stringr}{}%
-Wickham, H. (2019). \emph{Stringr: Simple, consistent wrappers for common string operations}. Retrieved from \url{https://CRAN.R-project.org/package=stringr}
-
-\leavevmode\hypertarget{ref-R-forcats}{}%
-Wickham, H. (2020). \emph{Forcats: Tools for working with categorical variables (factors)}. Retrieved from \url{https://CRAN.R-project.org/package=forcats}
-
-\leavevmode\hypertarget{ref-R-tidyverse}{}%
-Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L. D., François, R., \ldots{} Yutani, H. (2019). Welcome to the tidyverse. \emph{Journal of Open Source Software}, \emph{4}(43), 1686. \url{https://doi.org/10.21105/joss.01686}
-
-\leavevmode\hypertarget{ref-R-dplyr}{}%
-Wickham, H., François, R., Henry, L., \& Müller, K. (2020). \emph{Dplyr: A grammar of data manipulation}. Retrieved from \url{https://CRAN.R-project.org/package=dplyr}
-
-\leavevmode\hypertarget{ref-R-tidyr}{}%
-Wickham, H., \& Henry, L. (2020). \emph{Tidyr: Tidy messy data}. Retrieved from \url{https://CRAN.R-project.org/package=tidyr}
-
-\leavevmode\hypertarget{ref-R-readr}{}%
-Wickham, H., Hester, J., \& Francois, R. (2018). \emph{Readr: Read rectangular text data}. Retrieved from \url{https://CRAN.R-project.org/package=readr}
-
-\leavevmode\hypertarget{ref-R-cowplot}{}%
-Wilke, C. O. (2019). \emph{Cowplot: Streamlined plot theme and plot annotations for 'ggplot2'}. Retrieved from \url{https://CRAN.R-project.org/package=cowplot}
-
-\leavevmode\hypertarget{ref-wolfe1998can}{}%
-Wolfe, J. M. (1998). What can 1 million trials tell us about visual search? \emph{Psychological Science}, \emph{9}(1), 33--39.
+\leavevmode\hypertarget{ref-xian2017zero}{}%
+Xian, Y., Schiele, B., \& Akata, Z. (2017). Zero-shot learning-the good, the bad and the ugly. In \emph{Proceedings of the ieee conference on computer vision and pattern recognition} (pp. 4582--4591).
 
 \endgroup
 
