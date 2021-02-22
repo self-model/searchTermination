@@ -4,3 +4,5 @@
 You can try Experiment 1 by clicking [here](https://matanmazor.github.io/termination/experiments/demos/exp1/)
 
 You can try Experiment 2 by clicking [here](https://matanmazor.github.io/termination/experiments/demos/exp2/)
+
+Fully-anonymized experimental data is available [here](https://github.com/matanmazor/termination/tree/main/experiments) 
