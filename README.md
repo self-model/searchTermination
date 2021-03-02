@@ -1,6 +1,6 @@
 # Zero-shot search termination reveals a dissociation between implicit and explicit metacognitive knowledge
 
-See preprint [here](https://psyarxiv.com/kfzvx/)
+See preprint [here](https://psyarxiv.com/kfzvx/).
 
 You can try Experiment 1 by clicking [here](https://matanmazor.github.io/termination/experiments/demos/exp1/).
 
