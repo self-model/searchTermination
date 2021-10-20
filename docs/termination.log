@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2021.2.24)  24 FEB 2021 14:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.4.30)  21 JUN 2021 10:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -33,7 +33,7 @@ Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
 Class apa6 Info: No bibliography package was specified; defaulting to (but not 
 loading) Biblatex on input line 213.
 (c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/lmodern.sty
-Package: lmodern 2009/10/30 v1.6 Latin Modern Fonts
+Package: lmodern 2015/05/01 v1.6.1 Latin Modern Fonts
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
 LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
@@ -72,7 +72,7 @@ Package: fontenc 2020/08/10 v2.0s Standard LaTeX package
 LaTeX Font Info:    Trying to load font information for T1+lmr on input line 11
 2.
 (c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmr.fd
-File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ))
 (c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/geometry/geometry
 .sty
@@ -328,17 +328,17 @@ tim
 )
 (c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/microty
 pe.sty
-Package: microtype 2021/02/22 v2.8a Micro-typographical refinements (RS)
+Package: microtype 2021/03/14 v2.8c Micro-typographical refinements (RS)
 \MT@toks=\toks25
 \MT@count=\count281
-LaTeX Info: Redefining \textls on input line 788.
+LaTeX Info: Redefining \textls on input line 790.
 \MT@outer@kern=\dimen178
-LaTeX Info: Redefining \textmicrotypecontext on input line 1358.
+LaTeX Info: Redefining \textmicrotypecontext on input line 1374.
 \MT@listname@count=\count282
 
 (c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/microty
 pe-pdftex.def
-File: microtype-pdftex.def 2021/02/22 v2.8a Definitions specific to pdftex (RS)
+File: microtype-pdftex.def 2021/03/14 v2.8c Definitions specific to pdftex (RS)
 
 LaTeX Info: Redefining \lsstyle on input line 915.
 LaTeX Info: Redefining \lslig on input line 915.
@@ -348,8 +348,24 @@ Package microtype Info: Loading configuration file microtype.cfg.
 
 (c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/microty
 pe.cfg
-File: microtype.cfg 2021/02/22 v2.8a microtype main configuration file (RS)
+File: microtype.cfg 2021/03/14 v2.8c microtype main configuration file (RS)
 ))
+(c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/parskip/parskip.s
+ty
+Package: parskip 2021-03-14 v2.0h non-zero parskip adjustments
+
+(c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptio
+ns.sty
+Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
+
+(c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds
+.sty
+Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
+)
+(c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/kvsetkeys/kvset
+keys.sty
+Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
+)))
 (c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
 
@@ -370,12 +386,8 @@ Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 )
 (c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref
 .sty
-Package: hyperref 2021-02-10 v7.00j Hypertext links for LaTeX
+Package: hyperref 2021-02-27 v7.00k Hypertext links for LaTeX
 
-(c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds
-.sty
-Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
-)
 (c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdft
 excmds.sty
 Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
@@ -388,10 +400,6 @@ Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
-)
-(c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/kvsetkeys/kvset
-keys.sty
-Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
 )
 (c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kv
 definekeys.sty
@@ -413,23 +421,19 @@ Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
 ty
 Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
 )
-(c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptio
-ns.sty
-Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
-)
 \@linkdim=\dimen179
 \Hy@linkcounter=\count283
 \Hy@pagecounter=\count284
 
 (c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.d
 ef
-File: pd1enc.def 2021-02-10 v7.00j Hyperref: PDFDocEncoding definition (HO)
+File: pd1enc.def 2021-02-27 v7.00k Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 )
 (c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref
 -langpatches.def
-File: hyperref-langpatches.def 2021-02-10 v7.00j Hyperref: patches for babel la
+File: hyperref-langpatches.def 2021-02-27 v7.00k Hyperref: patches for babel la
 nguages
 )
 (c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/intcalc/intcalc
@@ -444,7 +448,7 @@ Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 
 (c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.de
 f
-File: puenc.def 2021-02-10 v7.00j Hyperref: PDF Unicode definition (HO)
+File: puenc.def 2021-02-27 v7.00k Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
 )
@@ -500,7 +504,7 @@ Package hyperref Info: Driver (autodetected): hpdftex.
 
 (c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.
 def
-File: hpdftex.def 2021-02-10 v7.00j Hyperref driver for pdfTeX
+File: hpdftex.def 2021-02-27 v7.00k Hyperref driver for pdfTeX
 
 (c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/atveryend-lt
 x.sty
@@ -562,7 +566,7 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 )
 (c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/multirow/multirow
 .sty
-Package: multirow 2021/01/29 v2.7 Span multiple rows of a table
+Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
 \multirow@colwidth=\skip80
 \multirow@cntb=\count298
 \multirow@dima=\skip81
@@ -646,13 +650,13 @@ Package csquotes Info: ... configuration file loaded successfully.
 File: csquotes.cfg 
 ))
 (c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel/babel.sty
-Package: babel 2021/02/22 3.54 The Babel package
+Package: babel 2021/04/26 3.58 The Babel package
 
 (c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel/babel.def
-File: babel.def 2021/02/22 3.54 Babel common definitions
+File: babel.def 2021/04/26 3.58 Babel common definitions
 \babel@savecnt=\count313
 \U@D=\dimen197
-\l@babelnohyphens=\language3
+\l@unhyphenated=\language3
 
 (c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel/txtbabel.
 def)
@@ -663,16 +667,16 @@ def)
 (c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel-english/e
 nglish.ldf
 Language: english 2017/06/06 v3.3r English support from the babel system
-Package babel Info: \l@british = using hyphenrules for english
-(babel)             (\language0) on input line 82.
-Package babel Info: \l@UKenglish = using hyphenrules for english
-(babel)             (\language0) on input line 83.
-Package babel Info: \l@canadian = using hyphenrules for english
-(babel)             (\language0) on input line 102.
-Package babel Info: \l@australian = using hyphenrules for english
-(babel)             (\language0) on input line 105.
-Package babel Info: \l@newzealand = using hyphenrules for english
-(babel)             (\language0) on input line 108.
+Package babel Info: Hyphen rules for 'british' set to \l@english
+(babel)             (\language0). Reported on input line 82.
+Package babel Info: Hyphen rules for 'UKenglish' set to \l@english
+(babel)             (\language0). Reported on input line 83.
+Package babel Info: Hyphen rules for 'canadian' set to \l@english
+(babel)             (\language0). Reported on input line 102.
+Package babel Info: Hyphen rules for 'australian' set to \l@english
+(babel)             (\language0). Reported on input line 105.
+Package babel Info: Hyphen rules for 'newzealand' set to \l@english
+(babel)             (\language0). Reported on input line 108.
 )
 (c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel-english/e
 nglish.ldf
@@ -685,30 +689,30 @@ Package csquotes Info: Redefining alias 'default' -> 'english'.
 
 (c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backe
 nd-pdftex.def
-File: l3backend-pdftex.def 2021-02-18 L3 backend support: PDF output (pdfTeX)
+File: l3backend-pdftex.def 2021-03-18 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count315
 \l__pdf_internal_box=\box58
 ) (./termination.aux)
 \openout1 = `termination.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 142.
-LaTeX Font Info:    ... okay on input line 142.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 142.
-LaTeX Font Info:    ... okay on input line 142.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 142.
-LaTeX Font Info:    ... okay on input line 142.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 142.
-LaTeX Font Info:    ... okay on input line 142.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 142.
-LaTeX Font Info:    ... okay on input line 142.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 142.
-LaTeX Font Info:    ... okay on input line 142.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 142.
-LaTeX Font Info:    ... okay on input line 142.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 142.
-LaTeX Font Info:    ... okay on input line 142.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 142.
-LaTeX Font Info:    ... okay on input line 142.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 145.
+LaTeX Font Info:    ... okay on input line 145.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 145.
+LaTeX Font Info:    ... okay on input line 145.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 145.
+LaTeX Font Info:    ... okay on input line 145.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 145.
+LaTeX Font Info:    ... okay on input line 145.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 145.
+LaTeX Font Info:    ... okay on input line 145.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 145.
+LaTeX Font Info:    ... okay on input line 145.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 145.
+LaTeX Font Info:    ... okay on input line 145.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 145.
+LaTeX Font Info:    ... okay on input line 145.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 145.
+LaTeX Font Info:    ... okay on input line 145.
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -776,14 +780,14 @@ Package caption Info: longtable package is loaded.
 Package: ltcaption 2020/05/30 v1.4b longtable captions (AR)
 )
 Package caption Info: End \AtBeginDocument code.
-LaTeX Info: Redefining \microtypecontext on input line 142.
+LaTeX Info: Redefining \microtypecontext on input line 145.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 142.
+LaTeX Info: Redefining \showhyphens on input line 145.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -793,7 +797,7 @@ cfg
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
 (RS)
 )
-Package hyperref Info: Link coloring OFF on input line 142.
+Package hyperref Info: Link coloring OFF on input line 145.
 
 (c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.
 sty
@@ -809,46 +813,46 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count316
 )
-LaTeX Info: Redefining \ref on input line 142.
-LaTeX Info: Redefining \pageref on input line 142.
-LaTeX Info: Redefining \nameref on input line 142.
+LaTeX Info: Redefining \ref on input line 145.
+LaTeX Info: Redefining \pageref on input line 145.
+LaTeX Info: Redefining \nameref on input line 145.
 (./termination.out) (./termination.out)
 \@outlinefile=\write5
 \openout5 = `termination.out'.
 
-Class apa6 Info: Keywords not defined on input line 144.
+Class apa6 Info: Keywords not defined on input line 147.
 LaTeX Font Info:    Trying to load font information for T1+lmss on input line 1
-44.
+47.
 (c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmss.fd
-File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
+File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
-44.
+47.
 (c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
-File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
-44.
+47.
 (c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
-File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
+File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-144.
+147.
 (c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
-File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
+File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-144.
+147.
 (c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
-File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
+File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 144.
+(Font)              <12> on input line 147.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 144.
+(Font)              <8> on input line 147.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 144.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 144
+(Font)              <6> on input line 147.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 147
 .
 (c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -857,7 +861,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 144
+LaTeX Font Info:    Trying to load font information for U+msb on input line 147
 .
 (c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -873,20 +877,26 @@ File: mt-eur.cfg 2006/07/31 v1.1 microtype config. file: AMS Euler Roman (RS)
 pdftex.map}
 
 ] [2] [3]
-Underfull \vbox (badness 7649) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [4] [5]
 \openout4 = `termination.fff'.
 
-(termination.fff) [6] [7] [8] [9]
-Underfull \vbox (badness 3758) has occurred while \output is active []
-
-[10] [11]
+(termination.fff)
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[12] [13] [14] [15] [16] [17] [18] [19] [20] [21] [22] AED endfloat: Processing
- end Figures and Tables [23] (./termination.fff
-<figures/designExp1.png, id=298, 467.1051pt x 532.389pt>
+[6] [7] [8] [9] [10] [11] [12] [13]
+Underfull \vbox (badness 7308) has occurred while \output is active []
+
+[14] [15] [16]
+Underfull \vbox (badness 4752) has occurred while \output is active []
+
+[17] [18] [19]
+Underfull \vbox (badness 1184) has occurred while \output is active []
+
+[20] [21] [22] [23] AED endfloat: Processing end Figures and Tables [24] (./ter
+mination.fff
+<figures/designExp1.png, id=312, 467.1051pt x 532.389pt>
 File: figures/designExp1.png Graphic file (type png)
 <use figures/designExp1.png>
 Package pdftex.def Info: figures/designExp1.png  used on input line 4.
@@ -894,7 +904,7 @@ Package pdftex.def Info: figures/designExp1.png  used on input line 4.
 
 LaTeX Warning: Float too large for page by 155.9381pt on input line 5.
 
-<figures/models.png, id=300, 726.7953pt x 476.982pt>
+<figures/models.png, id=314, 726.7953pt x 476.982pt>
 File: figures/models.png Graphic file (type png)
 <use figures/models.png>
 Package pdftex.def Info: figures/models.png  used on input line 9.
@@ -902,32 +912,40 @@ Package pdftex.def Info: figures/models.png  used on input line 9.
 
 LaTeX Warning: Float too large for page by 51.82483pt on input line 10.
 
-<termination_files/figure-latex/exp1Plot-1.pdf, id=301, 469.755pt x 325.215pt>
+<termination_files/figure-latex/exp1Plot-1.pdf, id=315, 469.755pt x 325.215pt>
 File: termination_files/figure-latex/exp1Plot-1.pdf Graphic file (type pdf)
 <use termination_files/figure-latex/exp1Plot-1.pdf>
 Package pdftex.def Info: termination_files/figure-latex/exp1Plot-1.pdf  used on
  input line 14.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<termination_files/figure-latex/exp2Plot-1.pdf, id=302, 469.755pt x 325.215pt>
+<termination_files/figure-latex/exp2Plot-1.pdf, id=316, 469.755pt x 325.215pt>
 File: termination_files/figure-latex/exp2Plot-1.pdf Graphic file (type pdf)
 <use termination_files/figure-latex/exp2Plot-1.pdf>
 Package pdftex.def Info: termination_files/figure-latex/exp2Plot-1.pdf  used on
  input line 19.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-) [24 <./figures/designExp1.png>] [25 <./figures/models.png>] [26 <./terminatio
-n_files/figure-latex/exp1Plot-1.pdf>] [27 <./termination_files/figure-latex/exp
-2Plot-1.pdf>] (./termination.aux)
+<termination_files/figure-latex/FirstTrial-1.pdf, id=317, 469.755pt x 325.215pt
+>
+File: termination_files/figure-latex/FirstTrial-1.pdf Graphic file (type pdf)
+<use termination_files/figure-latex/FirstTrial-1.pdf>
+Package pdftex.def Info: termination_files/figure-latex/FirstTrial-1.pdf  used 
+on input line 24.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+) [25 <./figures/designExp1.png>] [26 <./figures/models.png>] [27 <./terminatio
+n_files/figure-latex/exp1Plot-1.pdf>] [28 <./termination_files/figure-latex/exp
+2Plot-1.pdf>] [29 <./termination_files/figure-latex/FirstTrial-1.pdf>] (./termi
+nation.aux)
 Package rerunfilecheck Info: File `termination.out' has not changed.
-(rerunfilecheck)             Checksum: 6315C4F073EA8D0D34EEA5712B21665F;4177.
+(rerunfilecheck)             Checksum: 371CBDDC2F7654C952BC1CFA57FCD12D;3860.
  ) 
 Here is how much of TeX's memory you used:
- 16185 strings out of 481009
- 250473 string characters out of 5907700
- 630984 words of memory out of 5000000
- 32813 multiletter control sequences out of 15000+600000
- 452424 words of font info for 123 fonts, out of 8000000 for 9000
+ 16288 strings out of 480954
+ 252863 string characters out of 5905582
+ 620961 words of memory out of 5000000
+ 32925 multiletter control sequences out of 15000+600000
+ 466461 words of font info for 137 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 83i,11n,88p,2250b,486s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 83i,11n,88p,2250b,460s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mat
 hit.enc}{c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/
 lm-rm.enc}{c:/Users/mmazor/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/l
@@ -941,10 +959,10 @@ X/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/mmazor/AppData/Roaming/Ti
 nyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Users/mmazor/AppData/Roam
 ing/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb><c:/Users/mmazor/AppData
 /Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
-Output written on termination.pdf (27 pages, 503782 bytes).
+Output written on termination.pdf (29 pages, 511636 bytes).
 PDF statistics:
- 393 PDF objects out of 1000 (max. 8388607)
- 344 compressed objects within 4 object streams
- 116 named destinations out of 1000 (max. 500000)
- 24789 words of extra memory for PDF output out of 24883 (max. 10000000)
+ 431 PDF objects out of 1000 (max. 8388607)
+ 378 compressed objects within 4 object streams
+ 122 named destinations out of 1000 (max. 500000)
+ 30946 words of extra memory for PDF output out of 35830 (max. 10000000)
 

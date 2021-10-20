@@ -1,0 +1,351 @@
+## Effect of RT-based trial exclusion
+
+Our pre-registered exclusion criterion for particularly slow (>1000 ms) and fast (<250 ms) trials resulted in the exclusion of a non-negligible number of trials per participant (more than two out of 12 trials on average). 
+
+```{r RT_histograms, echo=FALSE, fig.pos = 'H', out.width="\\textwidth", fig.cap="RT histograms in the first block (first four trials) of Exp. 1 and 2 as a function of search type and set size. Our pre-registered analysis included only trials between the two vertical lines, corresponding to 250 and 1000 ms."}
+
+p1 <- E1.search_df %>%
+  filter(test_part=='absence1') %>%
+  ggplot(aes(x=RT, color=search_type)) +
+  geom_density() +
+  geom_vline(xintercept=c(250,1000)) +
+  facet_wrap(~set_size,ncol=1) +
+  labs(title='Experiment 1',
+       color='Search type')+
+  theme(legend.position='bottom');
+
+p2 <- E2.search_df %>%
+  filter(test_part=='absence1') %>%
+  ggplot(aes(x=RT, color=search_type)) +
+  geom_density() +
+  geom_vline(xintercept=c(250,1000)) +
+  facet_wrap(~set_size,ncol=1) +
+  labs(title='Experiment 2',
+       color='search type')+
+  theme(legend.position='bottom')
+
+plot_grid(p1,p2,nrow=1);
+ggsave('figures/RT_hists.png',width=9,height=4.5)
+
+```
+
+To test the robustness of our findings to other RT-based exclusion criteria, we report here all pre-registered analyses, this time without excluding trials based on response time. Relaxing the RT-based exclusion criterion did not affect the results of most of our four pre-registered analyses, with the following exceptions: slopes for conjunctions slopes were now generally higher, and in Experiment 2, block 3, shape slope was not significantly different from the slope for conjunction search. Importantly, even when including these trials, shape slope was significantly different from conjunction slope in block 1. Furthermore, like in the original report, here also we find no learning effect between blocks 1 and 3. 
+
+```{r analyze_E1_no_RT_exp, echo=FALSE, cache=TRUE}
+
+E1_no_RT_exc.median_search_times <- E1_no_RT_exc.search_df %>%
+  filter(include==1) %>%
+  group_by(test_part,set_size,search_type) %>%
+  summarise(median_RT= median(RTcorrected), 
+            sem_RT=bootstrap_error(RTcorrected,N_perm))%>%
+  #since we are only looking at correct responses
+  mutate(response=test_part=='presence1')
+
+E1_no_RT_exc.mean_acc <- E1_no_RT_exc.search_df %>%
+  group_by(test_part,set_size,search_type) %>%
+  summarise(mean_acc=mean(correct))%>%
+  mutate(response=test_part=='presence1')
+
+E1_no_RT_exc.search_slopes <- E1_no_RT_exc.search_df %>%
+  filter(include==1) %>%
+  group_by(subj_id,search_type,test_part) %>%
+  do(model=lm(RTcorrected~set_size,data=.)) %>%
+  mutate(tidys=list(broom::tidy(model))) %>%
+  unnest(tidys) %>%
+  # we are interested in the slope, i.e., the effect of set size.
+  filter(term=='set_size')
+
+E1_no_RT_exc.mean_search_slopes <- E1_no_RT_exc.search_slopes %>%
+  group_by(search_type,test_part) %>%
+  summarise('mean_slope'=mean(estimate,na.rm=TRUE),
+            'se_slope' = se(estimate, na.rm=TRUE))
+
+E1_no_RT_exc.slopes_wide <- pivot_wider(E1_no_RT_exc.search_slopes,
+                           id_cols = 'subj_id',
+                           names_from = c('search_type','test_part'),
+                           values_from = estimate)
+```
+
+### Experiment 1
+
+
+*Hypothesis 1 (positive control)*: Search times in block 2 (target-present) followed the expected pattern, with a steep slope for conjunction search (`r apa_print(t.test(E1_no_RT_exc.slopes_wide$conjunction_presence1,na.rm=TRUE))$estimate`) and a shallow slope for color search (`r apa_print(t.test(E1_no_RT_exc.slopes_wide$color_presence1,na.rm=TRUE))$estimate`). The slope for color search was significantly lower than 10 ms/item and thus met our criterion for being considered 'pop-out' (`r apa_print(t.test(E1_no_RT_exc.slopes_wide$color_presence1,na.rm=TRUE,mu=10,alternative='less'))$statistic`). Furthermore, the difference between the slopes was significant (`r apa_print(t.test(E1_no_RT_exc.slopes_wide$conjunction_presence1-E1_no_RT_exc.slopes_wide$color_presence1,na.rm=TRUE))$statistic`). 
+
+*Hypothesis 2*: Similar to the second block, the slope for the conjunction search was steep (`r apa_print(t.test(E1_no_RT_exc.slopes_wide$conjunction_absence1,na.rm=TRUE))$estimate`). A clear ‘pop-out’ effect for color search was also evident (`r apa_print(t.test(E1_no_RT_exc.slopes_wide$color_absence1,na.rm=TRUE,mu=10, alternative='less'))$full_result`). Furthermore, the average search slope for color search in this first block was significantly different from that of the conjunction search (`r apa_print(t.test(E1_no_RT_exc.slopes_wide$conjunction_absence1-E1_no_RT_exc.slopes_wide$color_absence1,na.rm=TRUE))$statistic`), indicating that a color-absence pop-out is already in place prior to direct task experience. 
+
+*Hypothesis 3*: Like in the first block, in the third block color search complied with our criterion for ‘pop-out’  (`r apa_print(t.test(E1_no_RT_exc.slopes_wide$color_absence2,na.rm=TRUE,mu=10, alternative='less'))$full_result`), and was significantly different from the conjunction search slope (`r apa_print(t.test(E1_no_RT_exc.slopes_wide$conjunction_absence2-E1_no_RT_exc.slopes_wide$color_absence2,na.rm=TRUE))$statistic`). 
+
+*Hypothesis 4*:  We find no evidence for a learning effect (`r apa_print(t.test(E1_no_RT_exc.slopes_wide$color_absence1-E1_no_RT_exc.slopes_wide$color_absence2,na.rm=TRUE))$statistic`). Furthermore, a Bayesian t-test with a scaled Cauchy prior for effect sizes (r=0.707) provided strong evidence in favour of the absence of a learning effect (`r apa_print(ttestBF(na.omit(E1_no_RT_exc.slopes_wide$color_absence1-E1_no_RT_exc.slopes_wide$color_absence2)))$statistic`).
+
+*Hypothesis 5*: The change in slope between blocks 1 and 3 was similar for color and conjunction search (`r apa_print(t.test(E1_no_RT_exc.slopes_wide$color_absence1-E1_no_RT_exc.slopes_wide$color_absence2-E1_no_RT_exc.slopes_wide$conjunction_absence1+E1_no_RT_exc.slopes_wide$conjunction_absence2,na.rm=TRUE))$full_result`). 
+
+
+```{r exp1PlotnoRTexc, echo=FALSE, fig.pos = 'H', out.width="\\textwidth", fig.cap="Results from Experiment 1 without RT-based trial exclusion"}
+
+block_names <-  c("Block 1 (Absence)", "Block 2 (Presence)", "Block 3 (Absence)");
+names(block_names) <- c("absence1", "presence1", "absence2");
+
+RTplot <- ggplot(data=E1_no_RT_exc.median_search_times, 
+       aes(x=set_size, y=median_RT, color=search_type, fill=search_type, linetype=test_part)) +
+  geom_line(size=1) +
+  geom_point(aes(shape = search_type), size=4, color="black",stroke=1.5, alpha=0.8) +
+  scale_shape_manual(values=c(4,21))+
+  scale_fill_manual(values = c("black","#377eb8"))+
+  scale_color_manual(values = c("black","#377eb8"))+
+  scale_linetype_manual(values=c("21", "solid","21"))+
+  facet_grid(cols = vars(test_part))+
+  geom_errorbar(aes(ymin=median_RT-sem_RT,ymax=median_RT+sem_RT),linetype="solid", width=1.2, color="black") +
+  facet_grid(cols = vars(test_part), 
+             labeller = labeller(test_part = block_names))+
+  labs(x='set size',y='median RT (seconds)', title='Experiment 1') + 
+  theme_bw()+ 
+  scale_x_continuous(breaks = c(4,8))+
+  theme(legend.position=c(0.48,0.7),
+        legend.background = element_rect(fill=NA))+
+  guides(color = FALSE, linetype=FALSE) 
+
+accplot <- ggplot(data=E1_no_RT_exc.mean_acc, 
+       aes(x=set_size, y=mean_acc, fill=search_type)) +
+  geom_bar(position='dodge',stat='identity') +
+  theme_classic()+ 
+  scale_fill_manual(values = c("black","#377eb8"))+
+  facet_grid(cols = vars(test_part))+
+  labs(x='set size',y='accuracy') +
+  scale_x_continuous(breaks = c(4,8))+
+  scale_y_continuous(breaks = c(0.5,1))+
+  coord_cartesian(ylim=c(0.5,1)) +
+  theme(legend.position='none')+ theme(strip.background = element_blank(),
+   strip.text.x = element_blank())
+
+plot_grid(RTplot,accplot,nrow=2,rel_heights=c(3,1))
+
+ggsave('figures/results_Exp1_no_RT_exp.png',width=5,height=4.5)
+
+```
+
+### Experiment 2
+
+```{r analyzedataE2noRTexc, echo=FALSE, cache=TRUE}
+
+E2_no_RT_exc.median_search_times <- E2_no_RT_exc.search_df %>%
+  filter(include==1) %>%
+  group_by(test_part,set_size,search_type) %>%
+  summarise(mean_trial=mean(trial),median_RT= median(RTcorrected), 
+            sem_RT=bootstrap_error(RTcorrected,N_perm))%>%
+  mutate(response=test_part=='presence1')
+
+E2_no_RT_exc.mean_acc <- E2_no_RT_exc.search_df %>%
+  group_by(test_part,set_size,search_type) %>%
+  summarise(mean_acc=mean(correct))%>%
+  mutate(response=test_part=='presence1')
+
+E2_no_RT_exc.search_slopes <- E2_no_RT_exc.search_df %>%
+  filter(include==1) %>%
+  group_by(subj_id,search_type,test_part) %>%
+  do(model=lm(RTcorrected~set_size,data=.)) %>%
+  mutate(tidys=list(broom::tidy(model))) %>%
+  unnest(tidys) %>%
+  filter(term=='set_size')
+
+E2_no_RT_exc.mean_search_slopes <- E2_no_RT_exc.search_slopes %>%
+  group_by(search_type,test_part) %>%
+  summarise('mean_slope'=mean(estimate,na.rm=TRUE),
+            'se_slope' = se(estimate, na.rm=TRUE))
+
+E2_no_RT_exc.slopes_wide <- pivot_wider(E2_no_RT_exc.search_slopes,
+                           id_cols = 'subj_id',
+                           names_from = c('search_type','test_part'),
+                           values_from = estimate)
+```
+*Hypothesis 1 (positive control)*: Search times in block 2 (target-present) followed the expected pattern, with a steep slope for conjunction search (`r apa_print(t.test(E2_no_RT_exc.slopes_wide$conjunction_presence1,na.rm=TRUE))$estimate`) and a shallow slope for shape search (`r apa_print(t.test(E2_no_RT_exc.slopes_wide$shape_presence1,na.rm=TRUE))$estimate`). The slope for shape search was significantly lower than 10 ms/item and thus met our criterion for being considered 'pop-out' (`r apa_print(t.test(E2_no_RT_exc.slopes_wide$shape_presence1,na.rm=TRUE,mu=10,alternative='less'))$statistic`). Furthermore, the difference between the slopes was significant (`r apa_print(t.test(E2_no_RT_exc.slopes_wide$conjunction_presence1-E2_no_RT_exc.slopes_wide$shape_presence1,na.rm=TRUE))$statistic`). 
+
+*Hypothesis 2*: Also in the first block, the slope for conjunction search was steep (`r apa_print(t.test(E2_no_RT_exc.slopes_wide$conjunction_absence1,na.rm=TRUE))$estimate`). The slope for shape search was numerically lower than 10 ms/item, but not significantly so (`r apa_print(t.test(E2_no_RT_exc.slopes_wide$shape_absence1,na.rm=TRUE,mu=10, alternative='less'))$full_result`). Still, the average search slope for shape search in this first block was significantly different from that of the conjunction search (`r apa_print(t.test(E2_no_RT_exc.slopes_wide$conjunction_absence1-E2_no_RT_exc.slopes_wide$shape_absence1,na.rm=TRUE))$statistic`).
+
+*Hypothesis 3*: In the third block the slope for shape search was *higher* than 10 ms/item (`r apa_print(t.test(E2_no_RT_exc.slopes_wide$shape_absence2,na.rm=TRUE))$estimate`), and not significantly different from the the slope for conjunction search (`r apa_print(t.test(E2_no_RT_exc.slopes_wide$conjunction_absence2-E2_no_RT_exc.slopes_wide$shape_absence2,na.rm=TRUE))$statistic`).
+
+*Hypothesis 4*: To quantify a potential learning effect for shape search between blocks 1 and 3, we directly contrasted the search slope for shape search in these two 'target-absent' blocks. We find no evidence for a learning effect (`r apa_print(t.test(E2_no_RT_exc.slopes_wide$shape_absence1-E2_no_RT_exc.slopes_wide$shape_absence2,na.rm=TRUE))$statistic`). Furthermore, a Bayesian t-test with a scaled Cauchy prior for effect sizes (r=0.707) provided strong evidence against a learning effect (`r apa_print(ttestBF(na.omit(E2_no_RT_exc.slopes_wide$shape_absence1-E2_no_RT_exc.slopes_wide$shape_absence2)))$statistic`). 
+
+```{r exp2PlotnoRTexc, echo=FALSE, fig.pos = 'H', out.width="\\textwidth", fig.cap="Results from Experiment 1 without RT-based trial exclusion"}
+
+
+RTplot <- ggplot(data=E2_no_RT_exc.median_search_times, 
+       aes(x=set_size, y=median_RT, color=search_type, fill=search_type, linetype=test_part)) +
+  geom_line(size=1) +
+  geom_point(aes(shape = search_type), size=4, color="black",stroke=1.5, alpha=0.8) +
+  scale_shape_manual(values=c(4,22))+
+  scale_fill_manual(values = c('black',"#e41a1c"))+
+  scale_color_manual(values = c('black',"#e41a1c"))+
+  scale_linetype_manual(values=c("21", "solid","21"))+
+  facet_grid(cols = vars(test_part))+
+  geom_errorbar(aes(ymin=median_RT-sem_RT,ymax=median_RT+sem_RT),linetype="solid", width=1.2,color='black') +
+  facet_grid(cols = vars(test_part), 
+             labeller = labeller(test_part = block_names))+
+  labs(x='set size',y='median RT (seconds)', title='Experiment 2') + 
+  theme_bw()+ 
+  scale_x_continuous(breaks = c(4,8))+
+  theme(legend.position=c(0.48,0.7),
+        legend.background = element_rect(fill=NA))+
+  guides(color = FALSE, linetype=FALSE) 
+
+accplot <- ggplot(data=E2_no_RT_exc.mean_acc, 
+       aes(x=set_size, y=mean_acc, fill=search_type)) +
+  geom_bar(position='dodge',stat='identity') +
+  theme_classic()+ 
+  scale_fill_manual(values = c('black',"#e41a1c"))+
+  facet_grid(cols = vars(test_part))+
+  labs(x='set size',y='accuracy') +
+  scale_x_continuous(breaks = c(4,8))+
+  scale_y_continuous(breaks = c(0.5,1))+
+  coord_cartesian(ylim=c(0.5,1)) +
+  theme(legend.position='none')+ theme(strip.background = element_blank(),
+   strip.text.x = element_blank())
+
+plot_grid(RTplot,accplot,nrow=2,rel_heights=c(3,1))
+
+ggsave('figures/results_Exp2_no_RT_exp.png',width=5,height=4.5)
+
+```
+
+## practice trials
+
+```{r extract_practice_trials, echo=FALSE, warning=FALSE, message=FALSE}
+
+E1.practice <- E1.df %>%
+  filter((test_part=='practice' &
+            !subj_id%in%E1.excluded$subj_id)) %>%
+  dplyr::select('subj_id','test_part','set_size','target_present','correct','RT') %>%
+  #response was not coded directly, so is instead inferred from accuracy and stimulus
+  mutate(response = ifelse(correct==1, target_present, 1-target_present)) %>%
+  mutate(trial = sequence(rle(as.character(subj_id))$lengths))%>%
+  group_by(subj_id)%>%
+  mutate(max_trial = max(trial));
+
+E2.practice <- E2.df %>%
+  filter((test_part=='practice' &
+            !subj_id%in%E2.excluded$subj_id)) %>%
+  dplyr::select('subj_id','test_part','set_size','target_present','correct','RT') %>%
+  #response was not coded directly, so is instead inferred from accuracy and stimulus
+  mutate(response = ifelse(correct==1, target_present, 1-target_present)) %>%
+  #in order to correct for serial position effects, I'm extracting a centered serial
+  #position value for each trial in a block (-1.5,-0.5,0.5,1.5)
+  mutate(trial = sequence(rle(as.character(subj_id))$lengths))%>%
+  group_by(subj_id)%>%
+  mutate(max_trial = max(trial))
+
+practice <- bind_rows(list(E1.practice,E2.practice),.id='exp')
+
+```
+
+In Experiment 1, participants performed on average `r practice%>%filter(trial==1 & exp==1)%>%pull(max_trial)%>%mean()%>%printnum()` practice trials, and `r round(practice%>%filter(trial==1 & exp==1)%>%mutate(one_block=max_trial==6)%>%pull(one_block)%>%mean()*100)` \% of participants finished the practice part after one block of six trials. 
+
+In Experiment 2, participants performed on average `r practice%>%filter(trial==1 & exp==2)%>%pull(max_trial)%>%mean()%>%printnum()` practice trials, and `r round(practice%>%filter(trial==1 & exp==2)%>%mutate(one_block=max_trial==6)%>%pull(one_block)%>%mean()*100)` \% of participants finished the practice part after one block of six trials.
+
+
+```{r count_practice, echo=FALSE, fig.pos = 'H', out.width="\\textwidth", fig.cap="Distribution of the number of practice trials performed before reaching the desired accuracy level"}
+
+experiment_names = c('1'='Exp. 1','2'='Exp. 2');
+
+practice %>%
+  filter(trial==1) %>%
+  ggplot(aes(x=max_trial)) +
+  geom_histogram()+
+  scale_x_continuous(breaks=seq(6,100,6))+
+  labs(x='number of practice trials',
+       y='count') +
+  facet_grid(rows=vars(exp), labeller=as_labeller(experiment_names))
+  
+  ggsave('figures/practice_hists.png',width=9,height=4.5)
+
+```
+
+
+```{r RT_serial_position_practice, echo=FALSE, fig.pos = 'H', out.width="\\textwidth", fig.cap="Upper panel: response time as a function of serial position within the first practice block, correct trials only. Lower panel: accuracy as a function of serial position within the first practice block"}
+
+
+practice_acc <- practice %>%
+  group_by(trial) %>%
+  summarise(acc=mean(correct));
+
+practice_RT <- practice %>%
+  filter(correct==1)%>%
+  group_by(trial) %>%
+  summarise(median_RT=median(RT),
+            sem_RT=bootstrap_error(RT,N_perm));
+
+RTplot <- ggplot(data=practice_RT %>%
+                   filter(trial<7), 
+       aes(x=trial, y=median_RT)) +
+  geom_line(size=1) +
+  geom_point(size=4, color="black",stroke=1.5, alpha=0.8) +
+  geom_errorbar(aes(ymin=median_RT-sem_RT,ymax=median_RT+sem_RT),linetype="solid", width=1.2,color='black') +
+  labs(x='trial number',y='median RT (ms)', title='Practice trials') + 
+  theme_bw()+ 
+  scale_x_continuous(breaks = seq(1,6))+
+  theme(legend.position='none',
+        legend.background = element_rect(fill=NA))+
+  guides(color = FALSE, linetype=FALSE) 
+
+accplot <- ggplot(data=practice_acc %>%
+                    filter(trial<7), 
+       aes(x=trial, y=acc)) +
+  geom_bar(position='dodge',stat='identity') +
+  theme_classic()+ 
+  labs(x='trial number',y='accuracy') +
+  scale_x_continuous(breaks = seq(1,6))+
+  scale_y_continuous(breaks = c(0.5,1))+
+  coord_cartesian(ylim=c(0.5,1)) +
+  theme(legend.position='none')+ theme(strip.background = element_blank(),
+   strip.text.x = element_blank())
+
+p <- plot_grid(RTplot,accplot,nrow=2,rel_heights=c(3,1))
+
+ggsave('figures/serial_position_practice.png',p,width=5,height=4.5)
+```
+
+## Trial order correction
+
+```{r no-trial-order-correction, echo=FALSE, cache=TRUE}
+
+E1.raw_search_slopes <- E1.search_df %>%
+  filter(include==1) %>%
+  group_by(subj_id,search_type,test_part) %>%
+  do(model=lm(RT~set_size,data=.)) %>%
+  mutate(tidys=list(broom::tidy(model))) %>%
+  unnest(tidys) %>%
+  # we are interested in the slope, i.e., the effect of set size.
+  filter(term=='set_size')
+
+E1.mean_raw_search_slopes <- E1.raw_search_slopes %>%
+  group_by(search_type,test_part) %>%
+  summarise('mean_slope'=mean(estimate,na.rm=TRUE),
+            'se_slope' = se(estimate, na.rm=TRUE))
+
+E1.raw_slopes_wide <- pivot_wider(E1.raw_search_slopes,
+                           id_cols = 'subj_id',
+                           names_from = c('search_type','test_part'),
+                           values_from = estimate)
+
+E2.raw_search_slopes <- E2.search_df %>%
+  filter(include==1) %>%
+  group_by(subj_id,search_type,test_part) %>%
+  do(model=lm(RT~set_size,data=.)) %>%
+  mutate(tidys=list(broom::tidy(model))) %>%
+  unnest(tidys) %>%
+  # we are interested in the slope, i.e., the effect of set size.
+  filter(term=='set_size')
+
+E2.mean_raw_search_slopes <- E2.raw_search_slopes %>%
+  group_by(search_type,test_part) %>%
+  summarise('mean_slope'=mean(estimate,na.rm=TRUE),
+            'se_slope' = se(estimate, na.rm=TRUE))
+
+E2.raw_slopes_wide <- pivot_wider(E2.raw_search_slopes,
+                           id_cols = 'subj_id',
+                           names_from = c('search_type','test_part'),
+                           values_from = estimate)
+```
+We wanted to address the potential concern that our results may reflect some artifact of the pre-registered trial order correction (see Methods). As we show in the main text, similar findings are obtained when analyzing only the first trial of each participant - an analysis that does not involve any order correction. In addition, here we repeated our main pre-registered analyses (specifically, H2 of both Experiments) on raw search times. Similar to our main results, in Exp. 1 conjunction absence search slope was steep (`r apa_print(t.test(E1.raw_slopes_wide$conjunction_absence1,na.rm=TRUE))$estimate`), color absence showed a pop-out effect (`r apa_print(t.test(E1.raw_slopes_wide$color_absence1,na.rm=TRUE,mu=10, alternative='less'))$full_result`), and the average search slope for color was significantly different from that of conjunction (`r apa_print(t.test(E1.raw_slopes_wide$conjunction_absence1-E1.raw_slopes_wide$color_absence1,na.rm=TRUE))$statistic`). In Exp. 2, conjunction absence search slope was steep (`r apa_print(t.test(E2.raw_slopes_wide$conjunction_absence1,na.rm=TRUE))$estimate`), shape absence showed a marginal pop-out effect (`r apa_print(t.test(E2.raw_slopes_wide$shape_absence1,na.rm=TRUE,mu=10, alternative='less'))$full_result`), and the average search slope for shape was significantly different from that of conjunction (`r apa_print(t.test(E2.raw_slopes_wide$conjunction_absence1-E2.raw_slopes_wide$shape_absence1,na.rm=TRUE))$statistic`). In conclusion, our results are fully robust to whether we actively control for serial order effects, or allow them to average out by trial order randomization. 
+
+## Learning effect for conjunction search
+
+In our pre-registered hypotheses we focused on feature search slopes, using conjunction search as a baseline condition. Our assumption was that conjunction search slopes should not change between blocks 1 and 3, and that any learning effect would be evident in feature search slopes instead. Indeed, we find no effect of block number on conjunction search slopes in Exp. 1 (`r apa_print(t.test(E1.slopes_wide$conjunction_absence1-E1.slopes_wide$conjunction_absence2,na.rm=TRUE))$full_result`) nor in Exp. 2 (`r apa_print(t.test(E2.slopes_wide$conjunction_absence1-E2.slopes_wide$conjunction_absence2,na.rm=TRUE))$full_result`). 
