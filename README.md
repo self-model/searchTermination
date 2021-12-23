@@ -1,6 +1,7 @@
-# Zero-shot search termination reveals a dissociation between implicit and explicit metacognitive knowledge
+# Efficient search termination without task experience
+## Matan Mazor & Stephen M. Fleming
 
-See preprint [here](https://psyarxiv.com/kfzvx/).
+In press, *Journal of Experimental Psychology: General*; See preprint [here](https://psyarxiv.com/kfzvx/).
 
 You can try Experiment 1 by clicking [here](https://matanmazor.github.io/termination/experiments/demos/exp1/).
 
